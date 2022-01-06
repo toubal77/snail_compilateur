@@ -15,11 +15,15 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.*;
 
+
 public class snail extends javax.swing.JFrame {
     @Serial
     private static final long serialVersionUID = 1L;
     private javax.swing.JTextArea Result;
     private javax.swing.JLabel jLabel2;
+
+    List<String> idenInt = new ArrayList<String>();
+    List<String> idenFloat = new ArrayList<String>();
 
     public boolean isIdent(String str) {
         char e = str.charAt(0);
@@ -206,9 +210,11 @@ public class snail extends javax.swing.JFrame {
                             break;
                         case "Snl_Int":
                             Result.append("Snl_Int    :Mot réservé pour déclaration d'un entier\n");
+                            idenInt.add(mot[i]);
                             break;
                         case "Snl_Real":
                             Result.append("Snl_Real    :Mot réservé pour déclaration d'un réel\n");
+                            idenFloat.add(mot[i]);
                             break;
                         case "Snl_Close":
                             Result.append("Snl_Close   :Mot réservé fin du programme\n");
