@@ -15,13 +15,12 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 public class snail extends javax.swing.JFrame {
-
     @Serial
     private static final long serialVersionUID = 1L;
     private javax.swing.JTextArea Result;
     private javax.swing.JLabel jLabel2;
 
-    public boolean isIdentificateur(String str) {
+    public boolean isIdent(String str) {
         char e = str.charAt(0);
         if (!Character.isLetter(e)) {
             return false;
@@ -100,7 +99,7 @@ public class snail extends javax.swing.JFrame {
         // Variables declaration - do not modify//GEN-BEGIN:variables
         JButton charger_un_fichier = new JButton();
         JButton syntaxe = new JButton();
-        JButton sémantique = new JButton();
+        JButton semantique = new JButton();
         JButton lexique = new JButton();
         JScrollPane jScrollPane1 = new JScrollPane();
         Result = new javax.swing.JTextArea();
@@ -127,10 +126,10 @@ public class snail extends javax.swing.JFrame {
         jPanel1.add(syntaxe);
         syntaxe.setBounds(10, 230, 150, 40);
 
-        sémantique.setText("A.SEMENTIQUE");
-        sémantique.addActionListener(this::SémantiqueActionPerformed);
-        jPanel1.add(sémantique);
-        sémantique.setBounds(10, 320, 150, 40);
+        semantique.setText("A.SEMENTIQUE");
+        semantique.addActionListener(this::SemantiqueActionPerformed);
+        jPanel1.add(semantique);
+        semantique.setBounds(10, 320, 150, 40);
 
         lexique.setText("A.LEXICAL");
         lexique.addActionListener(this::LexiqueActionPerformed);
@@ -244,7 +243,7 @@ public class snail extends javax.swing.JFrame {
 
                             break;
                         default:
-                            if (this.isIdentificateur(mot[i])) {
+                            if (this.isIdent(mot[i])) {
                                 Result.append(mot[i] + "  :identificateur\n");
                             } else if (snail.isint(mot[i])) {
                                 Result.append(mot[i] + "  :entier\n");
@@ -288,12 +287,12 @@ public class snail extends javax.swing.JFrame {
                         case "Snl_Int":
                             i++;
                             List<String> variable = new ArrayList<>();
-                            if (this.isIdentificateur(mot[i])) {
+                            if (this.isIdent(mot[i])) {
                                 variable.add(mot[i]);
                                 i++;
                             }
 
-                            if (this.isIdentificateur(mot[i - 1])) {
+                            if (this.isIdent(mot[i - 1])) {
                                 if (mot[i].equals("%.")) {
                                     Result.append(ligne + " :Déclaration de " + variable.size() + " entiers\n");
                                 }
@@ -303,7 +302,7 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "Set":
                             i++;
-                            if (this.isIdentificateur(mot[i])
+                            if (this.isIdent(mot[i])
                                     && (snail.isint(mot[i + 1]) || this.isFloat(mot[i + 1]))) {
                                 Result.append(
                                         ligne + "    :Affectation de la valeur " + mot[i + 1] + " a " + mot[i] + "\n");
@@ -314,12 +313,12 @@ public class snail extends javax.swing.JFrame {
                         case "Snl_Real":
                             i++;
                             List<String> real = new ArrayList<>();
-                            while (this.isIdentificateur(mot[i])) {
+                            while (this.isIdent(mot[i])) {
                                 real.add(mot[i]);
                                 i++;
                             }
 
-                            if (this.isIdentificateur(mot[i - 1])) {
+                            if (this.isIdent(mot[i - 1])) {
                                 if (mot[i].equals("%.")) {
                                     Result.append(ligne + "     :Déclaration de " + real.size() + " reel\n");
                                 }
@@ -329,7 +328,7 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "if":
                             i++;
-                            if (isIdentificateur(mot[i])) {
+                            if (isIdent(mot[i])) {
                                 Result.append(ligne + "   :condition\n ");
                             } else {
                                 Result.append(ligne + " erreur\n");
@@ -343,8 +342,8 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "Get":
                             i++;
-                            if (this.isIdentificateur(mot[i]) && "from".equals(mot[i + 1])
-                                    && this.isIdentificateur(mot[i + 2])) {
+                            if (this.isIdent(mot[i]) && "from".equals(mot[i + 1])
+                                    && this.isIdent(mot[i + 2])) {
                                 Result.append(ligne + "   :Affectation de la valeur de la variable " + mot[i + 2]
                                         + " a la variable " + mot[i] + "\n");
                             } else {
@@ -356,7 +355,7 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "Snl_Put":
                             i++;
-                            if (this.isIdentificateur(mot[i])) {
+                            if (this.isIdent(mot[i])) {
                                 Result.append(ligne + "    :ecrire la valeur de " + mot[i] + "\n");
                             } else {
                                 Result.append(ligne + "   :affichage d'un message al'ecran \n");
@@ -380,7 +379,7 @@ public class snail extends javax.swing.JFrame {
         }
     }
 
-    private void SémantiqueActionPerformed(java.awt.event.ActionEvent evt) {
+    private void SemantiqueActionPerformed(java.awt.event.ActionEvent evt) {
         Result.setText("");
         Path path = Paths.get(chemin);
         try {
@@ -401,11 +400,11 @@ public class snail extends javax.swing.JFrame {
                         case "Snl_Int":
                             i++;
                             List<String> sint = new ArrayList<>();
-                            while (this.isIdentificateur(mot[i])) {
+                            while (this.isIdent(mot[i])) {
                                 sint.add(mot[i]);
                                 i++;
                             }
-                            if (this.isIdentificateur(mot[i - 1])) {
+                            if (this.isIdent(mot[i - 1])) {
                                 if (mot[i].equals("%.")) {
                                     Result.append("int ");
                                     for (int j = 0; j < sint.size(); j++) {
@@ -421,7 +420,7 @@ public class snail extends javax.swing.JFrame {
                             break;
                         case "Set":
                             i++;
-                            if (this.isIdentificateur(mot[i])
+                            if (this.isIdent(mot[i])
                                     && (snail.isint(mot[i + 1]) || this.isFloat(mot[i + 1]))) {
                                 Result.append(mot[i] + " = " + mot[i + 1] + ";\n");
                             }
@@ -429,11 +428,11 @@ public class snail extends javax.swing.JFrame {
                         case "Snl_Real":
                             i++;
                             List<String> sreal = new ArrayList<>();
-                            while (this.isIdentificateur(mot[i])) {
+                            while (this.isIdent(mot[i])) {
                                 sreal.add(mot[i]);
                                 i++;
                             }
-                            if (this.isIdentificateur(mot[i - 1])) {
+                            if (this.isIdent(mot[i - 1])) {
                                 if (mot[i].equals("%.")) {
                                     Result.append("float ");
                                     for (int j = 0; j < sreal.size(); j++) {
@@ -452,8 +451,8 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "Get":
                             i++;
-                            if (this.isIdentificateur(mot[i]) && "from".equals(mot[i + 1])
-                                    && this.isIdentificateur(mot[i + 2])) {
+                            if (this.isIdent(mot[i]) && "from".equals(mot[i + 1])
+                                    && this.isIdent(mot[i + 2])) {
                                 Result.append(mot[i] + " = " + mot[i + 2] + ";\n");
                             }
                             continue;
@@ -462,7 +461,7 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "Snl_Put":
                             i++;
-                            if (this.isIdentificateur(mot[i])) {
+                            if (this.isIdent(mot[i])) {
                                 Result.append("System.out.println(" + mot[i] + ");\n");
                             } else {
                                 Result.append("System.out.println(" + mot[i] + ");\n");
