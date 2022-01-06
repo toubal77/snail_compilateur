@@ -73,6 +73,16 @@ public class snail extends javax.swing.JFrame {
         }
       //  return true;
     }
+    boolean isString(String str) {
+        try {
+            //  Float.parseFloat(str);
+            String regex = "[a-zA-Z0-9\\'-]+[a-zA-Z0-9]+";
+            return Pattern.matches(regex, str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+    }
 
     /**
      * Creates new form snail
@@ -212,6 +222,9 @@ public class snail extends javax.swing.JFrame {
                             Result.append("Snl_Int    :Mot réservé pour déclaration d'un entier\n");
                             idenInt.add(mot[i]);
                             break;
+                        case "SnlSt":
+                            Result.append("SnlSt    :Mot réservé pour déclaration d'une chaîne de caractère\n");
+                            break;
                         case "Snl_Real":
                             Result.append("Snl_Real    :Mot réservé pour déclaration d'un réel\n");
                             idenFloat.add(mot[i]);
@@ -261,6 +274,8 @@ public class snail extends javax.swing.JFrame {
                                 Result.append(mot[i] + "  :entier\n");
                             } else if (this.isFloat(mot[i])) {
                                 Result.append(mot[i] + "  :réel\n");
+                            }else if (this.isString(mot[i])) {
+                                Result.append(mot[i] + "  :chaîne de caractère\n");
                             } else if (this.symbole(mot[i])) {
                                 Result.append(mot[i] + "  :symbole \n");
                             } else {
