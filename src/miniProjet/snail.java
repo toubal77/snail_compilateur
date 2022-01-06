@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.*;
 
 public class snail extends javax.swing.JFrame {
@@ -47,21 +48,26 @@ public class snail extends javax.swing.JFrame {
     }
 
     static boolean isint(String str) {
-        byte[] bytes = str.getBytes();
-        for (byte aByte : bytes) {
-            if (!Character.isDigit((char) aByte))
-                return false;
-        }
-        return true;
+       // byte[] bytes = str.getBytes();
+       // for (byte aByte : bytes) {
+       //     if (!Character.isDigit((char) aByte))
+       //         return false;
+       // }
+       // return true;
+        String regex = "[0-9]+";
+        return Pattern.matches(regex, str);
+
     }
 
     boolean isFloat(String str) {
         try {
-            Float.parseFloat(str);
+          //  Float.parseFloat(str);
+            String regex = "[0-9]+.[0-9]+";
+            return Pattern.matches(regex, str);
         } catch (NumberFormatException e) {
             return false;
         }
-        return true;
+      //  return true;
     }
 
     /**
@@ -76,7 +82,7 @@ public class snail extends javax.swing.JFrame {
     String chemin;
 
     boolean symbole(String str) {
-        boolean bool = str.length() <= 2;
+        boolean bool;
 
         bool = "<".equals(str) || ">".equals(str) || "<=".equals(str) || ">=".equals(str) || "==".equals(str);
 
@@ -280,7 +286,7 @@ public class snail extends javax.swing.JFrame {
                 ligne = ligne.replace("=", " = ");
                 String[] mot = ligne.split("( )|(,)");
                 for (int i = 0; i < mot.length; i++) {
-                    switch(mot[i]) {
+                    switch(mot[i]){
                         case "Snl_Start":
                             Result.append(ligne + "    :Mot réservé début du programme\n");
                             continue;
