@@ -52,12 +52,12 @@ public class snail extends javax.swing.JFrame {
     }
 
     static boolean isint(String str) {
-       // byte[] bytes = str.getBytes();
-       // for (byte aByte : bytes) {
-       //     if (!Character.isDigit((char) aByte))
-       //         return false;
-       // }
-       // return true;
+        // byte[] bytes = str.getBytes();
+        // for (byte aByte : bytes) {
+        //     if (!Character.isDigit((char) aByte))
+        //         return false;
+        // }
+        // return true;
         String regex = "[0-9]+";
         return Pattern.matches(regex, str);
 
@@ -65,13 +65,13 @@ public class snail extends javax.swing.JFrame {
 
     boolean isFloat(String str) {
         try {
-          //  Float.parseFloat(str);
+            //  Float.parseFloat(str);
             String regex = "[0-9]+.[0-9]+";
             return Pattern.matches(regex, str);
         } catch (NumberFormatException e) {
             return false;
         }
-      //  return true;
+        //  return true;
     }
     boolean isString(String str) {
         try {
@@ -268,19 +268,22 @@ public class snail extends javax.swing.JFrame {
 
                             break;
                         default:
-                            if (this.isIdent(mot[i])) {
+
+                            if (this.isIdent(mot[i]) || !this.isIdent(mot[i])) {
                                 Result.append(mot[i] + "  :identificateur\n");
-                            } else if (snail.isint(mot[i])) {
+                                } else if (snail.isint(mot[i])) {
                                 Result.append(mot[i] + "  :entier\n");
-                            } else if (this.isFloat(mot[i])) {
+                                } else if (this.isFloat(mot[i])) {
                                 Result.append(mot[i] + "  :réel\n");
-                            }else if (this.isString(mot[i])) {
-                                Result.append(mot[i] + "  :chaîne de caractère\n");
-                            } else if (this.symbole(mot[i])) {
-                                Result.append(mot[i] + "  :symbole \n");
-                            } else {
-                                Result.append(mot[i] + ":erreur\n");
-                            }
+                                }else if (this.isString(mot[i])) {
+                                    Result.append(mot[i] + "  :chaîne de caractère\n");
+                                } else if (this.symbole(mot[i])) {
+                                    Result.append(mot[i] + "  :symbole \n");
+                                }
+
+                            //else {
+                            //    Result.append(mot[i] + ":erreur\n");
+                            //}
 
                     }
 
