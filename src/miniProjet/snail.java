@@ -462,12 +462,39 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "Get":
                             i++;
-                            if (this.isIdent(mot[i]) && "from".equals(mot[i + 1])
-                                    && this.isIdent(mot[i + 2])) {
-                                //     Result.append(ligne + "   :Affectation de la valeur de la variable " + mot[i + 2] + " a la variable " + mot[i] + "\n");
+                            if (this.isIdent(mot[i]) && "from".equals(mot[i + 1]) && this.isIdent(mot[i + 2])) {
+                                if (!allIden.contains(mot[i]) ) {
+                                         Result.append(mot[i] + " n'ai pas declare\n");
+                                }
+                                if (!allIden.contains(mot[i+2]) ) {
+                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                }
+                                if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i+2])) {
+                                    Result.append(mot[i] + " raha real matnajamch tadi int\n");
+                                }
+                                if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i+2])) {
+                                    Result.append(mot[i] + " raha int matnajamch tadi real\n");
+                                }
                             } else {
-                                //     Result.append(ligne + " erreur\n");
+                                if(!"from".equals(mot[i + 1])){
+                                     Result.append("get variable from variable ya wahd lahmar\n");
+                                }
+                                if (!this.isIdent(mot[i])) {
+                                    Result.append(mot[i] + " ne respecte pas la syntaxe\n");
+                                }else{
+                                    if (!allIden.contains(mot[i]) ) {
+                                        Result.append(mot[i] + " n'ai pas declare\n");
+                                    }
+                                }
+                                if (!this.isIdent(mot[i+2])) {
+                                    Result.append(mot[i+2] + " ne respecte pas la syntaxe\n");
+                                }else{
+                                    if (!allIden.contains(mot[i+2]) ) {
+                                        Result.append(mot[i+2] + " n'ai pas declare\n");
+                                    }
+                                }
                             }
+
                             continue;
                         case "Finish":
                             // Result.append(ligne + "  :fin d'un block\n");
