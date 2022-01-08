@@ -342,6 +342,9 @@ public class snail extends javax.swing.JFrame {
                 ligne = ligne.replace("=", " = ");
                 ligne = ligne.replace("=", " = ");
                 String[] mot = ligne.split("( )|(,)");
+                if("%".equals(mot[0])||"%.".equals(mot[0])){
+                    Result.append("roh t3alam taktab commentaire ki syadak\n");
+                }
                 for (int i = 0; i < mot.length; i++) {
                     switch(mot[i]){
                         case "Snl_Start":
