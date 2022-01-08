@@ -504,10 +504,35 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "Snl_Put":
                             i++;
+
                             if (this.isIdent(mot[i])) {
-                                //     Result.append(ligne + "    :ecrire la valeur de " + mot[i] + "\n");
+                                if(!allIden.contains(mot[i])) {
+                                    while (i < mot.length) {
+                                        i++;
+                                    }
+                                    if ("\"".equals(mot[i - 2])) {
+                                        Result.append("nta tkamal katba bsh matabdach b \"\n");
+                                    }
+                                    if (!"%.".equals(mot[i - 1])){
+                                        Result.append("fin de ligne chkon ydirha ya kharaj lawla w talya ta3ak\n");
+                                    }
+                                    if (!"%.".equals(mot[i - 1]) && !"\"".equals(mot[i - 2])){
+                                        Result.append(mot[i-2] + " n'ai pas declare\n");
+                                    }
+                                }
                             } else {
-                                //    Result.append(ligne + "   :affichage d'un message al'ecran \n");
+
+                                if(!"\"".equals(mot[i]))
+                                Result.append(mot[i] + " syntaxe ya lahbib\n");
+
+                                while(i<mot.length){
+                                    i++;
+                                }
+                                if(!"\"".equals(mot[i-2]))
+                                    Result.append(mot[i-2]+" wsh chikh min tabda katba kamalha b \"\n");
+                                if(!"%.".equals(mot[i-1]))
+                                    Result.append(mot[i-1]+" fin de ligne chkon ydirha ya kharaj\n");
+
                             }
 
                             continue;
