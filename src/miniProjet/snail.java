@@ -22,6 +22,7 @@ public class snail extends javax.swing.JFrame {
     private javax.swing.JTextArea Result;
     private javax.swing.JLabel jLabel2;
 
+    List<String> allIden = new ArrayList<String>();
     List<String> idenInt = new ArrayList<String>();
     List<String> idenFloat = new ArrayList<String>();
 
@@ -322,6 +323,7 @@ public class snail extends javax.swing.JFrame {
                             while(i < mot.length){
                                 if(this.isIdent(mot[i])){
                                     variable.add(mot[i]);
+                                    allIden.add(mot[i]);
                                 }
                                 i++;
                             }
@@ -332,6 +334,9 @@ public class snail extends javax.swing.JFrame {
                             idenInt = variable;
                             System.out.println("howa madahli int");
                             System.out.println(idenInt);
+                            System.out.println("adi ga3 f int");
+                            System.out.println(allIden);
+
                             if (this.isIdent(mot[i - 1])) {
                                 if (mot[i].equals("%.")) {
                                 //    Result.append(ligne + " :Déclaration de " + variable.size() + " entiers\n");
@@ -343,32 +348,42 @@ public class snail extends javax.swing.JFrame {
                         case "Set":
                             i++;
                             if (this.isIdent(mot[i]) && (snail.isint(mot[i + 1]))) {
-                                if(!idenInt.contains(mot[i])){
-                                    Result.append(mot[i] + " n'ai pas declare\n");
-                                }else{
-                                    if(!idenInt.contains(mot[i])) {
-                                        Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar \n");
+                               // if(!idenInt.contains(mot[i])){
+                               //     Result.append(mot[i] + " n'ai pas declare\n");
+                               // }else{
+                                if(allIden.contains(mot[i])) {
+                                    if (!idenInt.contains(mot[i])) {
+                                        Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar \n");
                                     }
-                                }
+                                }else{
+                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                }                              //  }
                               //  Result.append(ligne + "    :Affectation de la valeur " + mot[i + 1] + " a " + mot[i] + "\n");
                             } else {
-                                if (!this.isIdent(mot[i])) {
-                                    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
+
+                                if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
+                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                //    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
                                 }
                             }
 
-                            if (this.isIdent(mot[i]) && this.isFloat(mot[i + 1])) {
-                                if(!idenFloat.contains(mot[i])){
-                                    Result.append(mot[i] + " n'ai pas declare\n");
-                                }else{
-                                    if(!idenFloat.contains(mot[i])) {
-                                        Result.append(mot[i] + "    :tadi i  int hada makan ya wahd lahmar \n");
+                            if (this.isIdent(mot[i]) && (this.isFloat(mot[i + 1]))) {
+                                // if(!idenInt.contains(mot[i])){
+                                //     Result.append(mot[i] + " n'ai pas declare\n");
+                                // }else{
+                                if(allIden.contains(mot[i])) {
+                                    if (!idenFloat.contains(mot[i])) {
+                                        Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar \n");
                                     }
-                                }
+                                }else{
+                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                }                              //  }
                                 //  Result.append(ligne + "    :Affectation de la valeur " + mot[i + 1] + " a " + mot[i] + "\n");
                             } else {
-                                if (!this.isIdent(mot[i])) {
-                                    Result.append(mot[i] + "rani f real => ne respecte pas la syntaxe d'un identificateur\n");
+
+                                if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
+                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                    //    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
                                 }
                             }
 
@@ -379,6 +394,7 @@ public class snail extends javax.swing.JFrame {
                             while(i < mot.length){
                                 if(this.isIdent(mot[i])){
                                     real.add(mot[i]);
+                                    allIden.add(mot[i]);
                                 }
                                 i++;
                             }
@@ -389,7 +405,8 @@ public class snail extends javax.swing.JFrame {
                             idenFloat = real;
                             System.out.println("howa madahli real");
                             System.out.println(idenFloat);
-
+                            System.out.println("adi ga3 f real");
+                            System.out.println(allIden);
                             if (this.isIdent(mot[i - 1])) {
                                 if (mot[i].equals("%.")) {
                                     //    Result.append(ligne + "     :Déclaration de " + real.size() + " reel\n");
