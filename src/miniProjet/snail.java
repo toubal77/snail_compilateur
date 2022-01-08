@@ -284,9 +284,7 @@ public class snail extends javax.swing.JFrame {
                             break;
                         default:
 
-                            if (this.isIdent(mot[i]) || !this.isIdent(mot[i])) {
-                                Result.append(mot[i] + "  :identificateur\n");
-                                } else if (snail.isint(mot[i])) {
+                             if (snail.isint(mot[i])) {
                                 Result.append(mot[i] + "  :entier\n");
                                 } else if (this.isFloat(mot[i])) {
                                 Result.append(mot[i] + "  :réel\n");
@@ -294,7 +292,9 @@ public class snail extends javax.swing.JFrame {
                                     Result.append(mot[i] + "  :chaîne de caractère\n");
                                 } else if (this.symbole(mot[i])) {
                                     Result.append(mot[i] + "  :symbole \n");
-                                }
+                                }else if (this.isIdent(mot[i]) || !this.isIdent(mot[i])) {
+                            Result.append(mot[i] + "  :identificateur\n");
+                        }
 
                             //else {
                             //    Result.append(mot[i] + ":erreur\n");
