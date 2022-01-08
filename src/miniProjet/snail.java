@@ -57,12 +57,6 @@ public class snail extends javax.swing.JFrame {
     }
 
     static boolean isint(String str) {
-        // byte[] bytes = str.getBytes();
-        // for (byte aByte : bytes) {
-        //     if (!Character.isDigit((char) aByte))
-        //         return false;
-        // }
-        // return true;
         String regex = "[0-9]+";
         return Pattern.matches(regex, str);
 
@@ -70,27 +64,22 @@ public class snail extends javax.swing.JFrame {
 
     boolean isSpace(String str) {
         try {
-            //  Float.parseFloat(str);
             String regex = " +";
             return Pattern.matches(regex, str);
         } catch (NumberFormatException e) {
             return false;
         }
-        //  return true;
     }
     boolean isFloat(String str) {
         try {
-            //  Float.parseFloat(str);
             String regex = "[0-9]+.[0-9]+";
             return Pattern.matches(regex, str);
         } catch (NumberFormatException e) {
             return false;
         }
-        //  return true;
     }
     boolean isString(String str) {
         try {
-            //  Float.parseFloat(str);
             String regex = "[a-zA-Z0-9\\'-]+[a-zA-Z0-9]+";
             return Pattern.matches(regex, str);
         } catch (NumberFormatException e) {
@@ -103,8 +92,6 @@ public class snail extends javax.swing.JFrame {
      * Creates new form snail
      */
     public snail() {
-
-
         initComponents();
         setResizable(false);
         setLocation(250, 100);
@@ -114,11 +101,8 @@ public class snail extends javax.swing.JFrame {
 
     boolean symbole(String str) {
         boolean bool;
-
         bool = "<".equals(str) || ">".equals(str) || "<=".equals(str) || ">=".equals(str) || "==".equals(str);
-
         return bool;
-
     }
 
     /**
@@ -204,14 +188,6 @@ public class snail extends javax.swing.JFrame {
         //String path;
         chemin = f.getAbsolutePath();
         jLabel2.setText(chemin);
-        //try {
-
-        //    BufferedReader br = new BufferedReader(new FileReader(f));
-        //    String str = br.readLine();
-
-        //} catch (IOException ex) {
-        //    Logger.getLogger(snail.class.getName()).log(Level.SEVERE, null, ex);
-        //}
 
     }
     private void LexiqueActionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,10 +278,6 @@ public class snail extends javax.swing.JFrame {
                                 Result.append(mot[i] + "  :identificateur\n");
                             }
 
-                            //else {
-                            //    Result.append(mot[i] + ":erreur\n");
-                            //}
-
                     }
 
                 }
@@ -348,7 +320,6 @@ public class snail extends javax.swing.JFrame {
                 for (int i = 0; i < mot.length; i++) {
                     switch(mot[i]){
                         case "Snl_Start":
-//                            Result.append(ligne + "    :Mot réservé début du programme\n");
                             continue;
                         case "Snl_Int":
                             i++;
@@ -360,20 +331,9 @@ public class snail extends javax.swing.JFrame {
                                 }
                                 i++;
                             }
-                            //while (this.isIdent(mot[i])) {
-                            //    variable.add(mot[i]);
-                            //    i++;
-                            //}
                             idenInt = variable;
-                            System.out.println("howa madahli int");
-                            System.out.println(idenInt);
-                            System.out.println("adi ga3 f int");
-                            System.out.println(allIden);
-
                             if (this.isIdent(mot[i - 1])) {
-                                if (mot[i].equals("%.")) {
-                                    //    Result.append(ligne + " :Déclaration de " + variable.size() + " entiers\n");
-                                }
+
                             } else {
                                 Result.append(mot[i - 1] + " :ne respecte pas la syntaxe d'un identificateur\n");
                             }
@@ -381,9 +341,7 @@ public class snail extends javax.swing.JFrame {
                         case "Set":
                             i++;
                             if (this.isIdent(mot[i]) && (snail.isint(mot[i + 1]))) {
-                                // if(!idenInt.contains(mot[i])){
-                                //     Result.append(mot[i] + " n'ai pas declare\n");
-                                // }else{
+
                                 if(allIden.contains(mot[i])) {
                                     if (!idenInt.contains(mot[i])) {
                                         Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar \n");
@@ -391,19 +349,16 @@ public class snail extends javax.swing.JFrame {
                                 }else{
                                     Result.append(mot[i] + " n'ai pas declare\n");
                                 }                              //  }
-                                //  Result.append(ligne + "    :Affectation de la valeur " + mot[i + 1] + " a " + mot[i] + "\n");
                             } else {
 
                                 if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
                                     Result.append(mot[i] + " n'ai pas declare\n");
-                                    //    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
+
                                 }
                             }
 
                             if (this.isIdent(mot[i]) && (this.isFloat(mot[i + 1]))) {
-                                // if(!idenInt.contains(mot[i])){
-                                //     Result.append(mot[i] + " n'ai pas declare\n");
-                                // }else{
+
                                 if(allIden.contains(mot[i])) {
                                     if (!idenFloat.contains(mot[i])) {
                                         Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar \n");
@@ -411,7 +366,7 @@ public class snail extends javax.swing.JFrame {
                                 }else{
                                     Result.append(mot[i] + " n'ai pas declare\n");
                                 }                              //  }
-                                //  Result.append(ligne + "    :Affectation de la valeur " + mot[i + 1] + " a " + mot[i] + "\n");
+
                             } else {
 
                                 if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
@@ -431,10 +386,7 @@ public class snail extends javax.swing.JFrame {
                                 }
                                 i++;
                             }
-                            //while (this.isIdent(mot[i])) {
-                            //    real.add(mot[i]);
-                            //    i++;
-                            //}
+
                             idenFloat = real;
                             System.out.println("howa madahli real");
                             System.out.println(idenFloat);
@@ -442,23 +394,21 @@ public class snail extends javax.swing.JFrame {
                             System.out.println(allIden);
                             if (this.isIdent(mot[i - 1])) {
                                 if (mot[i].equals("%.")) {
-                                    //    Result.append(ligne + "     :Déclaration de " + real.size() + " reel\n");
+
                                 }
                             }
-                            // else {
-                            //    Result.append(ligne + " erreur\n");
-                            //}
+
                             continue;
                         case "if":
                             i++;
                             if (isIdent(mot[i])) {
-                                //                    Result.append(ligne + "   :condition\n ");
+
                             } else {
-                                //          Result.append(ligne + " erreur\n");
+
                             }
                             continue;
                         case "Else":
-                            //    Result.append(ligne + "  :sinon \n");
+
                             continue;
                         case "SnlSt":
                             i++;
@@ -477,7 +427,7 @@ public class snail extends javax.swing.JFrame {
 
                             continue;
                         case "Start":
-                            // Result.append(ligne + "   :debut d'un block\n");
+
                             continue;
                         case "Get":
                             i++;
@@ -516,7 +466,7 @@ public class snail extends javax.swing.JFrame {
 
                             continue;
                         case "Finish":
-                            // Result.append(ligne + "  :fin d'un block\n");
+
                             continue;
                         case "Snl_Put":
                             i++;
@@ -553,10 +503,10 @@ public class snail extends javax.swing.JFrame {
 
                             continue;
                         case "%..":
-                            //        Result.append(ligne + "     :ligne reserver pour comenteur\n");
+
                             continue;
                         case "Snl_Close":
-                            //  Result.append(ligne + "       :fin programme\n ");
+
                             break;
 
                     }
