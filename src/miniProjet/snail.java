@@ -202,10 +202,6 @@ public class snail extends javax.swing.JFrame {
     private void LexiqueActionPerformed(java.awt.event.ActionEvent evt) {
         this.idenInt.clear();
         this.idenFloat.clear();
-        System.out.println("idenInt");
-        System.out.println(idenInt);
-        System.out.println("idenFloat");
-        System.out.println(idenFloat);
         Result.setText("");
         Path path = Paths.get(chemin);
         try {
@@ -228,21 +224,12 @@ public class snail extends javax.swing.JFrame {
                             break;
                         case "Snl_Int":
                             Result.append("Snl_Int    :Mot réservé pour déclaration d'un entier\n");
-                            while (this.isIdent(mot[i])) {
-                                idenInt.add(mot[i]);
-                                i++;
-                            }
                             break;
                         case "SnlSt":
                             Result.append("SnlSt    :Mot réservé pour déclaration d'une chaîne de caractère\n");
                             break;
                         case "Snl_Real":
                             Result.append("Snl_Real    :Mot réservé pour déclaration d'un réel\n");
-                            while (this.isIdent(mot[i])) {
-                              idenFloat.add(mot[i]);
-                                i++;
-                            }
-
                             break;
                         case "Snl_Close":
                             Result.append("Snl_Close   :Mot réservé fin du programme\n");
@@ -311,10 +298,6 @@ public class snail extends javax.swing.JFrame {
     }
 
     private void SyntaxeActionPerformed(java.awt.event.ActionEvent evt) {
-        System.out.println("idenInt");
-        System.out.println(idenInt);
-        System.out.println("idenFloat");
-        System.out.println(idenFloat);
         Result.setText("");
         Path path = Paths.get(chemin);
         try {
@@ -336,11 +319,17 @@ public class snail extends javax.swing.JFrame {
                         case "Snl_Int":
                             i++;
                             List<String> variable = new ArrayList<>();
-                            while (this.isIdent(mot[i])) {
-                                variable.add(mot[i]);
+                            while(i < mot.length){
+                                if(this.isIdent(mot[i])){
+                                    variable.add(mot[i]);
+                                }
                                 i++;
                             }
-                       //     idenInt = variable;
+                            //while (this.isIdent(mot[i])) {
+                            //    variable.add(mot[i]);
+                            //    i++;
+                            //}
+                            idenInt = variable;
                             System.out.println("howa madahli int");
                             System.out.println(idenInt);
                             if (this.isIdent(mot[i - 1])) {
@@ -387,11 +376,17 @@ public class snail extends javax.swing.JFrame {
                         case "Snl_Real":
                             i++;
                             List<String> real = new ArrayList<>();
-                            while (this.isIdent(mot[i])) {
-                                real.add(mot[i]);
+                            while(i < mot.length){
+                                if(this.isIdent(mot[i])){
+                                    real.add(mot[i]);
+                                }
                                 i++;
                             }
-                          //  idenFloat = real;
+                            //while (this.isIdent(mot[i])) {
+                            //    real.add(mot[i]);
+                            //    i++;
+                            //}
+                            idenFloat = real;
                             System.out.println("howa madahli real");
                             System.out.println(idenFloat);
 
