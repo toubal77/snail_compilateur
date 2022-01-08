@@ -22,6 +22,10 @@ public class snail extends javax.swing.JFrame {
     private javax.swing.JTextArea Result;
     private javax.swing.JLabel jLabel2;
 
+    boolean checkSnlStart = false;
+    boolean checkSnlClose = false;
+    boolean checkStart = false;
+    boolean checkFinish = false;
     List<String> allIden = new ArrayList<String>();
     List<String> idenInt = new ArrayList<String>();
     List<String> idenFloat = new ArrayList<String>();
@@ -221,6 +225,7 @@ public class snail extends javax.swing.JFrame {
                 for (int i = 0; i < mot.length; i++) {
                     switch (mot[i]) {
                         case "Snl_Start":
+                            checkSnlStart = true;
                             Result.append("Snl_Start:Mot réservé début du programme\n");
                             break;
                         case "Snl_Int":
@@ -233,6 +238,7 @@ public class snail extends javax.swing.JFrame {
                             Result.append("Snl_Real    :Mot réservé pour déclaration d'un réel\n");
                             break;
                         case "Snl_Close":
+                            checkSnlClose = true;
                             Result.append("Snl_Close   :Mot réservé fin du programme\n");
                             break;
                         case "Get":
@@ -252,9 +258,11 @@ public class snail extends javax.swing.JFrame {
                             Result.append("Else   :Sinon\n");
                             break;
                         case "Start":
+                            checkStart = true;
                             Result.append("Start  :Début d'un bloc\n");
                             break;
                         case "Finish":
+                            checkFinish = true;
                             Result.append("Finish   :Fin d'un bloc\n");
                             break;
                         case "%.":
@@ -304,6 +312,18 @@ public class snail extends javax.swing.JFrame {
         try {
 
             List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
+            if(!checkSnlStart){
+                Result.append("rak nasi Snl Start ya wahd lahmar\n");
+            }
+            if(!checkSnlClose){
+                Result.append("rak nasi Snl Close ya wahd lahmar\n");
+            }
+            if(checkStart && (checkFinish == false)){
+                Result.append("w bloc tabdah b Start w chkon adi ykamlah b finish nanak par exemple ? \n");
+            }
+            if(checkFinish && (checkStart == false)){
+                Result.append("sahbi baghi nsa9sik min tkamal haja sama surement bditha aya dir tcho Start \n");
+            }
             for (String ligne : lignes) {
                 ligne = ligne.replace("<", " < ");
                 ligne = ligne.replace(" , ", ",");
@@ -434,13 +454,12 @@ public class snail extends javax.swing.JFrame {
                             i++;
                             if (this.isIdent(mot[i]) && "from".equals(mot[i + 1])
                                     && this.isIdent(mot[i + 2])) {
-                                Result.append(ligne + "   :Affectation de la valeur de la variable " + mot[i + 2]
-                                        + " a la variable " + mot[i] + "\n");
+                           //     Result.append(ligne + "   :Affectation de la valeur de la variable " + mot[i + 2] + " a la variable " + mot[i] + "\n");
                             } else {
-                                Result.append(ligne + " erreur\n");
+                           //     Result.append(ligne + " erreur\n");
                             }
                             continue;
-                        case "Finishe":
+                        case "Finish":
                             // Result.append(ligne + "  :fin d'un block\n");
                             continue;
                         case "Snl_Put":
@@ -463,7 +482,6 @@ public class snail extends javax.swing.JFrame {
                 }
 
             }
-
         } catch (IOException ex) {
             Logger.getLogger(snail.class.getName()).log(Level.SEVERE, null, ex);
         }
