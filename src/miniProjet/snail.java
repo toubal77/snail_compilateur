@@ -460,6 +460,22 @@ public class snail extends javax.swing.JFrame {
                         case "Else":
                             //    Result.append(ligne + "  :sinon \n");
                             continue;
+                        case "SnlSt":
+                            i++;
+
+                            if(!"\"".equals(mot[i]))
+                                Result.append(mot[i] + " syntaxe ya lahbib rak nasi \" rak taktaf fi text\n");
+
+                            while(i<mot.length){
+                                i++;
+                            }
+                            if(!"\"".equals(mot[i-2]))
+                                Result.append(mot[i-2]+" wsh chikh min tabda katba kamalha b \" rak taktab fi text\n");
+                            if(!"%.".equals(mot[i-1]))
+                                Result.append(mot[i-1]+" fin de ligne chkon ydirha ya kharaj rak taktab fi text\n");
+
+
+                            continue;
                         case "Start":
                             // Result.append(ligne + "   :debut d'un block\n");
                             continue;
