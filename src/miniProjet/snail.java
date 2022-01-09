@@ -31,35 +31,23 @@ public class snail extends javax.swing.JFrame {
     List<String> idenFloat = new ArrayList<String>();
 
     public boolean isIdent(String str) {
-        char e = str.charAt(0);
-        if (!Character.isLetter(e)) {
-            return false;
-        }
-        for (int i = 1; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (!Character.isLetter(c) && !Character.isDigit(c)) {
-                if (c != '_') {
-                    return false;
-                } else {
-                    if (i + 1 >= str.length()) {
-                        return false;
-                    } else {
-                        i++;
-                        c = str.charAt(i);
-                        if (c == '_') {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
+        String regex = "^[a-z][_a-zA-Z_0-9]*$";
+        return Pattern.matches(regex, str);
     }
 
     static boolean isint(String str) {
         String regex = "[0-9]+";
         return Pattern.matches(regex, str);
 
+    }
+
+    boolean isChaine(String str) {
+        try {
+            String regex = "^[a-zA-Z0-9' ]+$";
+            return Pattern.matches(regex, str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     boolean isSpace(String str) {
@@ -70,6 +58,7 @@ public class snail extends javax.swing.JFrame {
             return false;
         }
     }
+
     boolean isFloat(String str) {
         try {
             String regex = "[0-9]+.[0-9]+";
@@ -78,6 +67,7 @@ public class snail extends javax.swing.JFrame {
             return false;
         }
     }
+
     boolean isString(String str) {
         try {
             String regex = "[a-zA-Z0-9\\'-]+[a-zA-Z0-9]+";
