@@ -201,45 +201,67 @@ public class snail extends javax.swing.JFrame {
                 for (int i = 0; i < mot.length; i++) {
                     switch (mot[i]) {
                         case "Snl_Start":
-                            checkSnlStart = true;
-                            Result.append("Snl_Start:Mot réservé début du programme\n");
+                            if(!mot[0].equals("%..")){
+                                checkSnlStart = true;
+                                Result.append("Snl_Start:Mot réservé début du programme\n");
+                            }
                             break;
                         case "Snl_Int":
-                            Result.append("Snl_Int    :Mot réservé pour déclaration d'un entier\n");
+                            if(!mot[0].equals("%..")){
+                                Result.append("Snl_Int    :Mot réservé pour déclaration d'un entier\n");
+                            }
                             break;
                         case "SnlSt":
-                            Result.append("SnlSt    :Mot réservé pour déclaration d'une chaîne de caractère\n");
+                            if(!mot[0].equals("%..")){
+                                Result.append("SnlSt    :Mot réservé pour déclaration d'une chaîne de caractère\n");
+                            }
                             break;
                         case "Snl_Real":
-                            Result.append("Snl_Real    :Mot réservé pour déclaration d'un réel\n");
+                            if(!mot[0].equals("%..")){
+                                Result.append("Snl_Real    :Mot réservé pour déclaration d'un réel\n");
+                            }
                             break;
                         case "Snl_Close":
-                            checkSnlClose = true;
-                            Result.append("Snl_Close   :Mot réservé fin du programme\n");
+                            if(!mot[0].equals("%..")){
+                                checkSnlClose = true;
+                                Result.append("Snl_Close   :Mot réservé fin du programme\n");
+                            }
                             break;
                         case "Get":
-                            Result.append(
-                                    "Get      :Mot réservé pour l'affectation d'une valeur de variable a une autre\n");
+                            if(!mot[0].equals("%..")){
+                                Result.append(
+                                        "Get      :Mot réservé pour l'affectation d'une valeur de variable a une autre\n");
+                            }
                             i++;
                             break;
                         case "Set":
-                            Result.append("Set     :Mot réservé pour l'affectation d'une valeur a une variable\n");
+                            if(!mot[0].equals("%..")){
+                                Result.append("Set     :Mot réservé pour l'affectation d'une valeur a une variable\n");
+                            }
                             i++;
                             break;
                         case "If":
-                            Result.append("If      :Mot réservé pour une condition\n");
+                            if(!mot[0].equals("%..")){
+                                Result.append("If      :Mot réservé pour une condition\n");
+                            }
                             i++;
                             break;
                         case "Else":
-                            Result.append("Else   :Sinon\n");
+                            if(!mot[0].equals("%..")) {
+                                Result.append("Else   :Sinon\n");
+                            }
                             break;
                         case "Start":
-                            checkStart = true;
-                            Result.append("Start  :Début d'un bloc\n");
+                            if(!mot[0].equals("%..")){
+                                checkStart = true;
+                                Result.append("Start  :Début d'un bloc\n");
+                            }
                             break;
                         case "Finish":
-                            checkFinish = true;
-                            Result.append("Finish   :Fin d'un bloc\n");
+                            if(!mot[0].equals("%..")){
+                                checkFinish = true;
+                                Result.append("Finish   :Fin d'un bloc\n");
+                            }
                             break;
                         case "%.":
                             Result.append("%.  : reserver pour fin ligne.\n");
@@ -251,8 +273,9 @@ public class snail extends javax.swing.JFrame {
                             Result.append("%   : parenthèse \n");
                             break;
                         case "Snl_Put":
-                            Result.append("Snl_Put   :Instruction d'affichage\n");
-
+                            if(!mot[0].equals("%..")){
+                                Result.append("Snl_Put   :Instruction d'affichage\n");
+                            }
                             break;
                         default:
 
