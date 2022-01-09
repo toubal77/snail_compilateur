@@ -378,10 +378,6 @@ public class snail extends javax.swing.JFrame {
                             }
 
                             idenFloat = real;
-                            System.out.println("howa madahli real");
-                            System.out.println(idenFloat);
-                            System.out.println("adi ga3 f real");
-                            System.out.println(allIden);
                             if (this.isIdent(mot[i - 1])) {
                                 if (mot[i].equals("%.")) {
 
@@ -402,13 +398,18 @@ public class snail extends javax.swing.JFrame {
                             continue;
                         case "SnlSt":
                             i++;
-
+                            String chaine_de_caractere = "";
                             if(!"\"".equals(mot[i]))
                                 Result.append(mot[i] + " syntaxe ya lahbib rak nasi \" rak taktaf fi text\n");
-
+                            chaine_de_caractere = chaine_de_caractere + mot[i+1] + " ";
                             while(i<mot.length){
+                                if(("\"".equals(mot[i])==false) && ("%.".equals(mot[i])==false)) {
+                                    chaine_de_caractere = chaine_de_caractere + mot[i] + " ";
+                                }
                                 i++;
                             }
+                            if(!this.isChaine(chaine_de_caractere))
+                                Result.append(" ha respecti kifach yakhatbo une chaine de caractere hambook \n");
                             if(!"\"".equals(mot[i-2]))
                                 Result.append(mot[i-2]+" wsh chikh min tabda katba kamalha b \" rak taktab fi text\n");
                             if(!"%.".equals(mot[i-1]))
