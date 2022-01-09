@@ -296,16 +296,17 @@ public class snail extends javax.swing.JFrame {
             if(checkFinish && (checkStart == false)){
                 Result.append("sahbi baghi nsa9sik min tkamal haja sama surement bditha aya dir tcho Start \n");
             }
-            for (String ligne : lignes) {
-                ligne = ligne.replace("<", " < ");
-                ligne = ligne.replace(" , ", ",");
-                ligne = ligne.replace(", ", ",");
-                ligne = ligne.replace(" ,", ",");
-                ligne = ligne.replace("=", " = ");
-                ligne = ligne.replace("=", " = ");
-                String[] mot = ligne.split("( )|(,)");
+      //      for (String ligne : lignes) {
+     for(int j=0; j<lignes.size();j++){
+                lignes.set(j, lignes.get(j).replace("<", " < "));
+         lignes.set(j, lignes.get(j).replace(" , ", ","));
+         lignes.set(j, lignes.get(j).replace(", ", ","));
+         lignes.set(j, lignes.get(j).replace(" ,", ","));
+         lignes.set(j, lignes.get(j).replace("=", " = "));
+         lignes.set(j, lignes.get(j).replace("=", " = "));
+                String[] mot = lignes.get(j).split("( )|(,)");
                 if("%".equals(mot[0])||"%.".equals(mot[0])){
-                    Result.append("roh t3alam taktab commentaire ki syadak\n");
+                    Result.append("roh t3alam taktab commentaire ki syadak f la ligne \n" +j);
                 }
                 for (int i = 0; i < mot.length; i++) {
                     switch(mot[i]){
@@ -325,7 +326,7 @@ public class snail extends javax.swing.JFrame {
                             if (this.isIdent(mot[i - 1])) {
 
                             } else {
-                                Result.append(mot[i - 1] + " :ne respecte pas la syntaxe d'un identificateur\n");
+                                Result.append(mot[i - 1] + " :ne respecte pas la syntaxe d'un identificateur f la ligne \n" +j);
                             }
                             continue;
                         case "Set":
@@ -334,15 +335,15 @@ public class snail extends javax.swing.JFrame {
 
                                 if(allIden.contains(mot[i])) {
                                     if (!idenInt.contains(mot[i])) {
-                                        Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar \n");
+                                        Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f la ligne \n" +j);
                                     }
                                 }else{
-                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                    Result.append(mot[i] + " n'ai pas declare f la ligne \n" +j);
                                 }                              //  }
                             } else {
 
                                 if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                    Result.append(mot[i] + " n'ai pas declare f la ligne \n" +j);
 
                                 }
                             }
@@ -351,16 +352,16 @@ public class snail extends javax.swing.JFrame {
 
                                 if(allIden.contains(mot[i])) {
                                     if (!idenFloat.contains(mot[i])) {
-                                        Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar \n");
+                                        Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar f la ligne \n" +j);
                                     }
                                 }else{
-                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                    Result.append(mot[i] + " n'ai pas declare f la ligne \n" +j);
                                 }                              //  }
 
                             } else {
 
                                 if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                    Result.append(mot[i] + " n'ai pas declare f la ligne \n" +j);
                                     //    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
                                 }
                             }
@@ -400,7 +401,7 @@ public class snail extends javax.swing.JFrame {
                             i++;
                             String chaine_de_caractere = "";
                             if(!"\"".equals(mot[i]))
-                                Result.append(mot[i] + " syntaxe ya lahbib rak nasi \" rak taktaf fi text\n");
+                                Result.append(mot[i] + " syntaxe ya lahbib rak nasi \" rak taktaf fi text f la ligne \n" +j);
                             chaine_de_caractere = chaine_de_caractere + mot[i+1] + " ";
                             while(i<mot.length){
                                 if(("\"".equals(mot[i])==false) && ("%.".equals(mot[i])==false)) {
@@ -409,11 +410,11 @@ public class snail extends javax.swing.JFrame {
                                 i++;
                             }
                             if(!this.isChaine(chaine_de_caractere))
-                                Result.append(" ha respecti kifach yakhatbo une chaine de caractere hambook \n");
+                                Result.append(" ha respecti kifach yakhatbo une chaine de caractere hambook f la ligne \n" +j);
                             if(!"\"".equals(mot[i-2]))
-                                Result.append(mot[i-2]+" wsh chikh min tabda katba kamalha b \" rak taktab fi text\n");
+                                Result.append(mot[i-2]+" wsh chikh min tabda katba kamalha b \" rak taktab fi text f la ligne \n" +j);
                             if(!"%.".equals(mot[i-1]))
-                                Result.append(mot[i-1]+" fin de ligne chkon ydirha ya kharaj rak taktab fi text\n");
+                                Result.append(mot[i-1]+" fin de ligne chkon ydirha ya kharaj rak taktab fi text f la ligne \n" +j);
 
 
                             continue;
@@ -424,33 +425,33 @@ public class snail extends javax.swing.JFrame {
                             i++;
                             if (this.isIdent(mot[i]) && "from".equals(mot[i + 1]) && this.isIdent(mot[i + 2])) {
                                 if (!allIden.contains(mot[i]) ) {
-                                         Result.append(mot[i] + " n'ai pas declare\n");
+                                         Result.append(mot[i] + " n'ai pas declare f la ligne \n" +j);
                                 }
                                 if (!allIden.contains(mot[i+2]) ) {
-                                    Result.append(mot[i] + " n'ai pas declare\n");
+                                    Result.append(mot[i] + " n'ai pas declare f la ligne \n" +j);
                                 }
                                 if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i+2])) {
-                                    Result.append(mot[i] + " raha real matnajamch tadi int\n");
+                                    Result.append(mot[i] + " raha real matnajamch tadi int f la ligne \n" +j);
                                 }
                                 if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i+2])) {
-                                    Result.append(mot[i] + " raha int matnajamch tadi real\n");
+                                    Result.append(mot[i] + " raha int matnajamch tadi real f la ligne \n" +j);
                                 }
                             } else {
                                 if(!"from".equals(mot[i + 1])){
-                                     Result.append("get variable from variable ya wahd lahmar\n");
+                                     Result.append("get variable from variable ya wahd lahmar f la ligne \n" +j);
                                 }
                                 if (!this.isIdent(mot[i])) {
-                                    Result.append(mot[i] + " ne respecte pas la syntaxe\n");
+                                    Result.append(mot[i] + " ne respecte pas la syntaxe f la ligne \n" +j);
                                 }else{
                                     if (!allIden.contains(mot[i]) ) {
-                                        Result.append(mot[i] + " n'ai pas declare\n");
+                                        Result.append(mot[i] + " n'ai pas declare f la ligne \n" +j);
                                     }
                                 }
                                 if (!this.isIdent(mot[i+2])) {
-                                    Result.append(mot[i+2] + " ne respecte pas la syntaxe\n");
+                                    Result.append(mot[i+2] + " ne respecte pas la syntaxe f la ligne \n" +j);
                                 }else{
                                     if (!allIden.contains(mot[i+2]) ) {
-                                        Result.append(mot[i+2] + " n'ai pas declare\n");
+                                        Result.append(mot[i+2] + " n'ai pas declare f la ligne \n" +j);
                                     }
                                 }
                             }
@@ -468,27 +469,27 @@ public class snail extends javax.swing.JFrame {
                                         i++;
                                     }
                                     if ("\"".equals(mot[i - 2])) {
-                                        Result.append("nta tkamal katba bsh matabdach b \"\n");
+                                        Result.append("nta tkamal katba bsh matabdach b \" f la ligne \n" +j);
                                     }
                                     if (!"%.".equals(mot[i - 1])){
-                                        Result.append("fin de ligne chkon ydirha ya kharaj lawla w talya ta3ak\n");
+                                        Result.append("fin de ligne chkon ydirha ya kharaj lawla w talya ta3ak f la ligne \n" +j);
                                     }
                                     if (!"%.".equals(mot[i - 1]) && !"\"".equals(mot[i - 2])){
-                                        Result.append(mot[i-2] + " n'ai pas declare\n");
+                                        Result.append(mot[i-2] + " n'ai pas declare f la ligne \n" +j);
                                     }
                                 }
                             } else {
 
                                 if(!"\"".equals(mot[i]))
-                                Result.append(mot[i] + " syntaxe ya lahbib\n");
+                                Result.append(mot[i] + " syntaxe ya lahbib f la ligne \n" +j);
 
                                 while(i<mot.length){
                                     i++;
                                 }
                                 if(!"\"".equals(mot[i-2]))
-                                    Result.append(mot[i-2]+" wsh chikh min tabda katba kamalha b \"\n");
+                                    Result.append(mot[i-2]+" wsh chikh min tabda katba kamalha b \" f la ligne \n" +j);
                                 if(!"%.".equals(mot[i-1]))
-                                    Result.append(mot[i-1]+" fin de ligne chkon ydirha ya kharaj\n");
+                                    Result.append(mot[i-1]+" fin de ligne chkon ydirha ya kharaj f la ligne \n" +j);
 
                             }
 
