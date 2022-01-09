@@ -319,14 +319,15 @@ public class snail extends javax.swing.JFrame {
                                 if(this.isIdent(mot[i])){
                                     variable.add(mot[i]);
                                     allIden.add(mot[i]);
+                                } else {
+                                    if (!"%".equals(mot[i]) &&!"%.".equals(mot[i]))
+                                    Result.append(mot[i] + " :respecte pas la syntaxe d'un identificateur f la ligne \n\n" +j);
                                 }
                                 i++;
                             }
                             idenInt = variable;
-                            if (this.isIdent(mot[i - 1])) {
-
-                            } else {
-                                Result.append(mot[i - 1] + " :ne respecte pas la syntaxe d'un identificateur f la ligne \n" +j);
+                            if (!mot[i-1].equals("%.")) {
+                                Result.append(" dir fin de ligne mat3ayinich la ligne \n\n" +j);
                             }
                             continue;
                         case "Set":
@@ -365,7 +366,9 @@ public class snail extends javax.swing.JFrame {
                                     //    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
                                 }
                             }
-
+                            if (!mot[i-1].equals("%.")) {
+                                Result.append(" dir fin de ligne mat3ayinich la ligne \n\n" +j);
+                            }
                             continue;
                         case "Snl_Real":
                             i++;
@@ -384,7 +387,9 @@ public class snail extends javax.swing.JFrame {
 
                                 }
                             }
-
+                            if (!mot[i-1].equals("%.")) {
+                                Result.append(" dir fin de ligne mat3ayinich la ligne \n\n" +j);
+                            }
                             continue;
                         case "if":
                             i++;
@@ -455,7 +460,9 @@ public class snail extends javax.swing.JFrame {
                                     }
                                 }
                             }
-
+                            if (!mot[i-1].equals("%.")) {
+                                Result.append(" dir fin de ligne mat3ayinich la ligne \n\n" +j);
+                            }
                             continue;
                         case "Finish":
 
