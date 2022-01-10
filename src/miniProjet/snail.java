@@ -434,13 +434,36 @@ public class snail extends javax.swing.JFrame {
                                 }
                             }
                             continue;
-                        case "if":
+                        case "If":
                             i++;
-                            if (isIdent(mot[i])) {
-
-                            } else {
-
+                            if(!"%".equals(mot[i])){
+                                Result.append(" rak nasi debut wala fin ta3 parenthese \n\n" + j);
                             }
+                            if(!allIden.contains(mot[i+1])){
+                                Result.append(mot[i+1]+" marahach desclare \n\n" + j);
+                            }
+                            if(!this.isIdent(mot[i+1])){
+                                Result.append(mot[i+1]+" t3ayi ya lahbib syntaxe hmbk \n\n" + j);
+                            }
+                            if(!this.symbole(mot[i+3])){
+                                Result.append(mot[i+3]+" symbole chkon ydirha \n\n" + j);
+                            }
+
+                            if(!allIden.contains(mot[i+5])){
+                                Result.append(mot[i+5]+" marahach desclare \n\n" + j);
+                            }
+                            if(!this.isIdent(mot[i+5])){
+                                Result.append(mot[i+5]+" t3ayi ya lahbib syntaxe hmbk \n\n" + j);
+                            }
+
+                            if(!"%".equals(mot[i+6])){
+                                Result.append(" rak nasi debut wala fin ta3 parenthese \n\n" + j);
+                            }
+
+                            if(!"do".equals(mot[i+7])){
+                                Result.append(" do chkon ydirha \n\n" + j);
+                            }
+
                             continue;
                         case "Else":
 
