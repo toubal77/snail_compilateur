@@ -291,7 +291,11 @@ public class snail extends javax.swing.JFrame {
                             } else if (this.symbole(mot[i])) {
                                 if(!mot[0].equals("%.."))
                                 Result.append(mot[i] + "  :symbole \n");
-                            }else if (this.isIdent(mot[i]) || !this.isIdent(mot[i])) {
+                            }else if ("\"".equals(mot[i])) {
+                                Result.append(mot[i] + "  :debut ou fin de chaine de caractere\n");
+                            }else if (this.isSpace(mot[i])) {
+                                Result.append(mot[i] + "  :espace\n");
+                            } else if (this.isIdent(mot[i]) || !this.isIdent(mot[i])) {
                                 if(!mot[0].equals("%.."))
                                 Result.append(mot[i] + "  :identificateur\n");
                             }
@@ -357,8 +361,8 @@ public class snail extends javax.swing.JFrame {
                                 idenInt = variable;
                                 System.out.println("rani jabt int");
                                 System.out.println(idenInt);
-                                if (!mot[i - 1].equals("%.")) {
-                                    Result.append(" dir fin de ligne mat3ayinich la ligne \n\n" + j);
+                                if (!mot[i-1].equals("%.")) {
+                                    Result.append("ergg dir fin de ligne mat3ayinich la ligne \n\n" + j);
                                 }
                             }
                             continue;
@@ -399,8 +403,9 @@ public class snail extends javax.swing.JFrame {
                                         //    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
                                     }
                                 }
-                                if (!mot[i - 1].equals("%.")) {
-                                    Result.append(" dir fin de ligne mat3ayinich la ligne \n\n" + j);
+                                while(i<mot.length){i++;}
+                                if (!mot[i-1].equals("%.")) {
+                                    Result.append(mot[i-1]+" dir rfgr fin de ligne mat3ayinich la ligne \n\n" + j);
                                 }
                             }
                             continue;
@@ -424,8 +429,8 @@ public class snail extends javax.swing.JFrame {
 
                                     }
                                 }
-                                if (!mot[i - 1].equals("%.")) {
-                                    Result.append(" dir fin de ligne mat3ayinich la ligne \n\n" + j);
+                                if (!mot[i-1].equals("%.")) {
+                                    Result.append(" dir fin de ligne mat3ayinich la ligne frgr \n\n" + j);
                                 }
                             }
                             continue;
@@ -500,8 +505,8 @@ public class snail extends javax.swing.JFrame {
                                         }
                                     }
                                 }
-                                if (!mot[i - 1].equals("%.")) {
-                                    Result.append(" dir fin de ligne mat3ayinich la ligne \n\n" + j);
+                                if (!mot[i-1].equals("%.")) {
+                                    Result.append("  dir fin de ligne mat3ayinich dfgf la ligne \n\n" + j);
                                 }
                             }
                             continue;
