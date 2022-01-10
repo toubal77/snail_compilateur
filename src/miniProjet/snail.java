@@ -197,11 +197,13 @@ public class snail extends javax.swing.JFrame {
 
             for (String ligne : lignes) {
                 ligne = ligne.replace("<", " < ");
+                ligne = ligne.replace(">", " > ");
                 ligne = ligne.replace(" , ", ",");
                 ligne = ligne.replace(", ", ",");
                 ligne = ligne.replace(" ,", ",");
-                ligne = ligne.replace("=", " = ");
-                ligne = ligne.replace("=", " = ");
+                ligne = ligne.replace("==", " == ");
+                ligne = ligne.replace(">=", " >= ");
+                ligne = ligne.replace("<=", " <= ");
                 String[] mot = ligne.split("( )|(,)");
 
                 for (int i = 0; i < mot.length; i++) {
@@ -337,11 +339,13 @@ public class snail extends javax.swing.JFrame {
             //      for (String ligne : lignes) {
             for(int j=0; j<lignes.size();j++){
                 lignes.set(j, lignes.get(j).replace("<", " < "));
+                lignes.set(j, lignes.get(j).replace(">", " > "));
                 lignes.set(j, lignes.get(j).replace(" , ", ","));
                 lignes.set(j, lignes.get(j).replace(", ", ","));
                 lignes.set(j, lignes.get(j).replace(" ,", ","));
-                lignes.set(j, lignes.get(j).replace("=", " = "));
-                lignes.set(j, lignes.get(j).replace("=", " = "));
+                lignes.set(j, lignes.get(j).replace("==", " == "));
+                lignes.set(j, lignes.get(j).replace(">=", " >= "));
+                lignes.set(j, lignes.get(j).replace("<=", " <= "));
                 String[] mot = lignes.get(j).split("( )|(,)");
                 if("%".equals(mot[0])||"%.".equals(mot[0])){
                     Result.append("roh t3alam taktab commentaire ki syadak f la ligne \n" +j);
@@ -604,11 +608,13 @@ public class snail extends javax.swing.JFrame {
             List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
             for (String ligne : lignes) {
                 ligne = ligne.replace("<", " < ");
+                ligne = ligne.replace(">", " > ");
                 ligne = ligne.replace(" , ", ",");
                 ligne = ligne.replace(", ", ",");
                 ligne = ligne.replace(" ,", ",");
-                ligne = ligne.replace("=", " = ");
-                ligne = ligne.replace("=", " = ");
+                ligne = ligne.replace("==", " == ");
+                ligne = ligne.replace(">=", " >= ");
+                ligne = ligne.replace("<=", " <= ");
                 String[] mot = ligne.split("( )|(,)");
                 for (int i = 0; i < mot.length; i++) {
                     switch(mot[i]) {
