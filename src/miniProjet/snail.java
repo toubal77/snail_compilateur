@@ -379,7 +379,9 @@ public class snail extends javax.swing.JFrame {
                                         Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
                                     }                              //  }
                                 } else {
-
+                                    if (!this.isIdent(mot[i])) {
+                                        Result.append(mot[i] + "  :syntaxe please f la ligne \n" + j);
+                                    }
                                     if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
                                         Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
 
@@ -397,7 +399,9 @@ public class snail extends javax.swing.JFrame {
                                     }                              //  }
 
                                 } else {
-
+                                    if (!this.isIdent(mot[i])) {
+                                        Result.append(mot[i] + "  :syntaxe please f la ligne \n" + j);
+                                    }
                                     if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
                                         Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
                                         //    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
@@ -417,7 +421,11 @@ public class snail extends javax.swing.JFrame {
                                     if (this.isIdent(mot[i])) {
                                         real.add(mot[i]);
                                         allIden.add(mot[i]);
+                                    } else {
+                                 if(!"%.".equals(mot[i]))
+                                        Result.append(mot[i] + "  :syntaxe f real please f la ligne \n" + j);
                                     }
+
                                     i++;
                                 }
 
