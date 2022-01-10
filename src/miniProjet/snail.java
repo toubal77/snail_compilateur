@@ -172,6 +172,13 @@ public class snail extends javax.swing.JFrame {
     }
 
     private void Charger_un_fichierActionPerformed(java.awt.event.ActionEvent evt) {
+        checkSnlStart = false;
+        checkSnlClose = false;
+        checkStart = false;
+        checkFinish = false;
+        allIden.clear();
+        idenInt.clear();
+        idenFloat.clear();
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
@@ -359,8 +366,7 @@ public class snail extends javax.swing.JFrame {
                                     i++;
                                 }
                                 idenInt = variable;
-                                System.out.println("rani jabt int");
-                                System.out.println(idenInt);
+
                                 if (!mot[i-1].equals("%.")) {
                                     Result.append("ergg dir fin de ligne mat3ayinich la ligne \n\n" + j);
                                 }
@@ -430,8 +436,7 @@ public class snail extends javax.swing.JFrame {
                                 }
 
                                 idenFloat = real;
-                                System.out.println("rani jabt float");
-                                System.out.println(idenFloat);
+
                                 if (this.isIdent(mot[i - 1])) {
                                     if (mot[i].equals("%.")) {
 
