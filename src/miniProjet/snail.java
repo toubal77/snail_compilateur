@@ -182,7 +182,6 @@ public class snail extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
-        //String path;
         chemin = f.getAbsolutePath();
         jLabel2.setText(chemin);
 
@@ -288,23 +287,23 @@ public class snail extends javax.swing.JFrame {
 
                             if (snail.isint(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                Result.append(mot[i] + "  :entier\n");
+                                    Result.append(mot[i] + "  :entier\n");
                             } else if (this.isFloat(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                Result.append(mot[i] + "  :réel\n");
+                                    Result.append(mot[i] + "  :réel\n");
                             }else if (this.isString(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                Result.append(mot[i] + "  :chaîne de caractère\n");
+                                    Result.append(mot[i] + "  :chaîne de caractère\n");
                             } else if (this.symbole(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                Result.append(mot[i] + "  :symbole \n");
+                                    Result.append(mot[i] + "  :symbole \n");
                             }else if ("\"".equals(mot[i])) {
                                 Result.append(mot[i] + "  :debut ou fin de chaine de caractere\n");
                             }else if (this.isSpace(mot[i])) {
                                 Result.append(mot[i] + "  :espace\n");
                             } else if (this.isIdent(mot[i]) || !this.isIdent(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                Result.append(mot[i] + "  :identificateur\n");
+                                    Result.append(mot[i] + "  :identificateur\n");
                             }
 
                     }
@@ -335,14 +334,14 @@ public class snail extends javax.swing.JFrame {
             if(checkFinish && (checkStart == false)){
                 Result.append("sahbi baghi nsa9sik min tkamal haja sama surement bditha aya dir tcho Start \n");
             }
-      //      for (String ligne : lignes) {
-     for(int j=0; j<lignes.size();j++){
+            //      for (String ligne : lignes) {
+            for(int j=0; j<lignes.size();j++){
                 lignes.set(j, lignes.get(j).replace("<", " < "));
-         lignes.set(j, lignes.get(j).replace(" , ", ","));
-         lignes.set(j, lignes.get(j).replace(", ", ","));
-         lignes.set(j, lignes.get(j).replace(" ,", ","));
-         lignes.set(j, lignes.get(j).replace("=", " = "));
-         lignes.set(j, lignes.get(j).replace("=", " = "));
+                lignes.set(j, lignes.get(j).replace(" , ", ","));
+                lignes.set(j, lignes.get(j).replace(", ", ","));
+                lignes.set(j, lignes.get(j).replace(" ,", ","));
+                lignes.set(j, lignes.get(j).replace("=", " = "));
+                lignes.set(j, lignes.get(j).replace("=", " = "));
                 String[] mot = lignes.get(j).split("( )|(,)");
                 if("%".equals(mot[0])||"%.".equals(mot[0])){
                     Result.append("roh t3alam taktab commentaire ki syadak f la ligne \n" +j);
@@ -383,7 +382,7 @@ public class snail extends javax.swing.JFrame {
                                         }
                                     } else {
                                         Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                    }                              //  }
+                                    }
                                 } else {
                                     if (!this.isIdent(mot[i])) {
                                         Result.append(mot[i] + "  :syntaxe please f la ligne \n" + j);
@@ -402,15 +401,13 @@ public class snail extends javax.swing.JFrame {
                                         }
                                     } else {
                                         Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                    }                              //  }
-
+                                    }
                                 } else {
                                     if (!this.isIdent(mot[i])) {
                                         Result.append(mot[i] + "  :syntaxe please f la ligne \n" + j);
                                     }
                                     if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
                                         Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                        //    Result.append(mot[i] + "rani f int => ne respecte pas la syntaxe d'un identificateur\n");
                                     }
                                 }
                                 while(i<mot.length){i++;}
@@ -428,8 +425,8 @@ public class snail extends javax.swing.JFrame {
                                         real.add(mot[i]);
                                         allIden.add(mot[i]);
                                     } else {
-                                 if(!"%.".equals(mot[i]))
-                                        Result.append(mot[i] + "  :syntaxe f real please f la ligne \n" + j);
+                                        if(!"%.".equals(mot[i]))
+                                            Result.append(mot[i] + "  :syntaxe f real please f la ligne \n" + j);
                                     }
 
                                     i++;
