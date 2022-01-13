@@ -1,6 +1,7 @@
 package miniProjet;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -389,7 +390,7 @@ public class snail extends javax.swing.JFrame {
 
                                         if (allIden.contains(mot[i])) {
                                             if (!idenInt.contains(mot[i])) {
-                                                Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f f la ligne"  + (j+1) + "\n\n");
+                                          //      Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f f la ligne"  + (j+1) + "\n\n");
                                             }
                                         } else {
                                             Result.append(mot[i] + " n'ai pas declare f la ligne" + (j+1) + "\n\n");
@@ -408,7 +409,7 @@ public class snail extends javax.swing.JFrame {
 
                                         if (allIden.contains(mot[i])) {
                                             if (!idenFloat.contains(mot[i])) {
-                                                Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar f la ligne"  + (j+1) + "\n\n");
+                                          //      Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar f la ligne"  + (j+1) + "\n\n");
                                             }
                                         } else {
                                             Result.append(mot[i] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
@@ -613,23 +614,23 @@ public class snail extends javax.swing.JFrame {
         }
     }
 
-    private void SemantiqueActionPerformed(java.awt.event.ActionEvent evt) {
+    private void SemantiqueActionPerformed(ActionEvent evt) {
         Result.setText("");
         Path path = Paths.get(chemin);
         try {
             if (syntaxique && lexical) {
                 semantique = true;
                 List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
-                for (String ligne : lignes) {
-                    ligne = ligne.replace("<", " < ");
-                    ligne = ligne.replace(">", " > ");
-                    ligne = ligne.replace(" , ", ",");
-                    ligne = ligne.replace(", ", ",");
-                    ligne = ligne.replace(" ,", ",");
-                    ligne = ligne.replace("==", " == ");
-                    ligne = ligne.replace(">=", " >= ");
-                    ligne = ligne.replace("<=", " <= ");
-                    String[] mot = ligne.split("( )|(,)");
+                for (int j = 0; j < lignes.size(); j++) {
+                    lignes.set(j, lignes.get(j).replace("<", " < "));
+                    lignes.set(j, lignes.get(j).replace(">", " > "));
+                    lignes.set(j, lignes.get(j).replace(" , ", ","));
+                    lignes.set(j, lignes.get(j).replace(", ", ","));
+                    lignes.set(j, lignes.get(j).replace(" ,", ","));
+                    lignes.set(j, lignes.get(j).replace("==", " == "));
+                    lignes.set(j, lignes.get(j).replace(">=", " >= "));
+                    lignes.set(j, lignes.get(j).replace("<=", " <= "));
+                    String[] mot = lignes.get(j).split("( )|(,)");
                     for (int i = 0; i < mot.length; i++) {
                         switch (mot[i]) {
                             case "Snl_Start":
@@ -638,7 +639,20 @@ public class snail extends javax.swing.JFrame {
                             case "Snl_Int":
                                 break;
                             case "Set":
-
+                                i++;
+                                    if (this.isIdent(mot[i]) && this.isFloat(mot[i + 1])) {
+                                        if (allIden.contains(mot[i])) {
+                                            if (!idenFloat.contains(mot[i])) {
+                                                Result.append(mot[i] + "    : tadi i int hada makan ya wahd lahmar f la ligne " + (j + 1) + "\n\n");
+                                            }
+                                        }
+                                    }else {
+                                        if (allIden.contains(mot[i])) {
+                                            if (!idenInt.contains(mot[i])) {
+                                                Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f f la ligne"  + (j+1) + "\n\n");
+                                            }
+                                        }
+                                    }
                                 continue;
                             case "Snl_Real":
 
