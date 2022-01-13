@@ -203,14 +203,15 @@ public class snail extends javax.swing.JFrame {
             List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
 
             for (String ligne : lignes) {
-                ligne = ligne.replace("<", " < ");
-                ligne = ligne.replace(">", " > ");
-                ligne = ligne.replace(" , ", ",");
+               // ligne = ligne.replace("<", " < ");
+                //ligne = ligne.replace(">", " > ");
+                 ligne = ligne.replace(" , ", ",");
                 ligne = ligne.replace(", ", ",");
                 ligne = ligne.replace(" ,", ",");
-                ligne = ligne.replace("==", " == ");
-                ligne = ligne.replace(">=", " >= ");
-                ligne = ligne.replace("<=", " <= ");
+                // ligne = ligne.replace("==", " == ");
+                // ligne = ligne.replace(">=", " >= ");
+                // ligne = ligne.replace("<=", " <= ");
+                ligne = ligne.replace("\t","");
                 String[] mot = ligne.split("( )|(,)");
 
                 for (int i = 0; i < mot.length; i++) {
@@ -354,6 +355,7 @@ public class snail extends javax.swing.JFrame {
                     lignes.set(j, lignes.get(j).replace("==", " == "));
                     lignes.set(j, lignes.get(j).replace(">=", " >= "));
                     lignes.set(j, lignes.get(j).replace("<=", " <= "));
+                    lignes.set(j,lignes.get(j).replace("\t",""));
                     String[] mot = lignes.get(j).split("( )|(,)");
                     if ("%".equals(mot[0]) || "%.".equals(mot[0])) {
                         Result.append("roh t3alam taktab commentaire ki syadak f la ligne" + (j+1) + "\n\n");
@@ -643,6 +645,7 @@ public class snail extends javax.swing.JFrame {
                     lignes.set(j, lignes.get(j).replace("==", " == "));
                     lignes.set(j, lignes.get(j).replace(">=", " >= "));
                     lignes.set(j, lignes.get(j).replace("<=", " <= "));
+                    lignes.set(j, lignes.get(j).replace("\t", ""));
                     String[] mot = lignes.get(j).split("( )|(,)");
                     for (int i = 0; i < mot.length; i++) {
                         switch (mot[i]) {
