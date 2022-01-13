@@ -620,6 +620,19 @@ public class snail extends javax.swing.JFrame {
         try {
             if (syntaxique && lexical) {
                 semantique = true;
+                // int h = 0;
+                //    while (h < idenInt.size()) {
+                    //     if (idenFloat.contains(idenInt.get(h))) {
+                        //   Result.append(idenInt.get(h) + "    :rahi deja declare f real\n\n");
+                        //  }
+                    // }
+
+                //  int hh = 0;
+                //  while (hh < idenFloat.size()) {
+                    // if (idenInt.contains(idenFloat.get(hh))) {
+                        //Result.append(idenFloat.get(hh) + "    :rahi deja declare f int\n\n");
+                        //    }
+                //}
                 List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
                 for (int j = 0; j < lignes.size(); j++) {
                     lignes.set(j, lignes.get(j).replace("<", " < "));
