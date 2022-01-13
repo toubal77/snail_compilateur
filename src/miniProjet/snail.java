@@ -633,93 +633,39 @@ public class snail extends javax.swing.JFrame {
                     for (int i = 0; i < mot.length; i++) {
                         switch (mot[i]) {
                             case "Snl_Start":
-                                Result.append("main(){\n");
+
                                 continue;
                             case "Snl_Int":
-                                i++;
-                                List<String> sint = new ArrayList<>();
-                                while (this.isIdent(mot[i])) {
-                                    sint.add(mot[i]);
-                                    i++;
-                                }
-                                if (this.isIdent(mot[i - 1])) {
-                                    if (mot[i].equals("%.")) {
-                                        Result.append("int ");
-                                        for (int j = 0; j < sint.size(); j++) {
-                                            if (j == sint.size() - 1) {
-                                                Result.append(sint.get(j));
-                                            } else {
-                                                Result.append(sint.get(j) + ",");
-                                            }
-                                        }
-                                        Result.append(";\n");
-                                    }
-                                }
                                 break;
                             case "Set":
-                                i++;
-                                if (this.isIdent(mot[i])
-                                        && (snail.isint(mot[i + 1]) || this.isFloat(mot[i + 1]))) {
-                                    Result.append(mot[i] + " = " + mot[i + 1] + ";\n");
-                                }
+
                                 continue;
                             case "Snl_Real":
-                                i++;
-                                List<String> sreal = new ArrayList<>();
-                                while (this.isIdent(mot[i])) {
-                                    sreal.add(mot[i]);
-                                    i++;
-                                }
-                                if (this.isIdent(mot[i - 1])) {
-                                    if (mot[i].equals("%.")) {
-                                        Result.append("float ");
-                                        for (int j = 0; j < sreal.size(); j++) {
-                                            if (j == sreal.size() - 1) {
-                                                Result.append(sreal.get(j));
-                                            } else {
-                                                Result.append(sreal.get(j) + ",");
-                                            }
-                                        }
-                                        Result.append(";\n");
-                                    }
-                                }
+
                                 continue;
                             case "Start":
-                                Result.append("{\n");
+
                                 continue;
                             case "Get":
-                                i++;
-                                if (this.isIdent(mot[i]) && "from".equals(mot[i + 1])
-                                        && this.isIdent(mot[i + 2])) {
-                                    Result.append(mot[i] + " = " + mot[i + 2] + ";\n");
-                                }
+
                                 continue;
                             case "Finish":
-                                Result.append("}\n");
+
                                 continue;
                             case "Snl_Put":
-                                i++;
-                                if (this.isIdent(mot[i])) {
-                                    Result.append("System.out.println(" + mot[i] + ");\n");
-                                } else {
-                                    Result.append("System.out.println(" + mot[i] + ");\n");
-                                }
 
                                 continue;
                             case "%..":
-                                i++;
-                                Result.append("//" + Arrays.toString(ligne.split("%..")) + "\n");
+
                                 continue;
 
                             case "If":
-                                i++;
-                                Result.append("if(" + mot[i + 1] + mot[i + 2] + mot[i + 3] + ")\n");
+
                                 continue;
                             case "Else":
-                                Result.append("else\n");
+
                                 continue;
                             case "Snl_Close":
-                                Result.append("} ");
                                 break;
 
                         }
