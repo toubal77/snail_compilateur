@@ -26,6 +26,9 @@ public class snail extends javax.swing.JFrame {
     boolean checkSnlClose = false;
     boolean checkStart = false;
     boolean checkFinish = false;
+    boolean semantique = false;
+    boolean syntaxique = false;
+    boolean lexical = false;
     List<String> allIden = new ArrayList<String>();
     List<String> idenInt = new ArrayList<String>();
     List<String> idenFloat = new ArrayList<String>();
@@ -192,7 +195,7 @@ public class snail extends javax.swing.JFrame {
         Result.setText("");
         Path path = Paths.get(chemin);
         try {
-
+            lexical = true;
             List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
 
             for (String ligne : lignes) {
@@ -322,280 +325,286 @@ public class snail extends javax.swing.JFrame {
         Result.setText("");
         Path path = Paths.get(chemin);
         try {
-
-            List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
-            if(!checkSnlStart){
-                Result.append("rak nasi Snl Start ya wahd lahmar\n");
-            }
-            if(!checkSnlClose){
-                Result.append("rak nasi Snl Close ya wahd lahmar\n");
-            }
-            if(checkStart && (checkFinish == false)){
-                Result.append("w bloc tabdah b Start w chkon adi ykamlah b finish nanak par exemple ? \n");
-            }
-            if(checkFinish && (checkStart == false)){
-                Result.append("sahbi baghi nsa9sik min tkamal haja sama surement bditha aya dir tcho Start \n");
-            }
-            //      for (String ligne : lignes) {
-            for(int j=0; j<lignes.size();j++){
-                lignes.set(j, lignes.get(j).replace("<", " < "));
-                lignes.set(j, lignes.get(j).replace(">", " > "));
-                lignes.set(j, lignes.get(j).replace(" , ", ","));
-                lignes.set(j, lignes.get(j).replace(", ", ","));
-                lignes.set(j, lignes.get(j).replace(" ,", ","));
-                lignes.set(j, lignes.get(j).replace("==", " == "));
-                lignes.set(j, lignes.get(j).replace(">=", " >= "));
-                lignes.set(j, lignes.get(j).replace("<=", " <= "));
-                String[] mot = lignes.get(j).split("( )|(,)");
-                if("%".equals(mot[0])||"%.".equals(mot[0])){
-                    Result.append("roh t3alam taktab commentaire ki syadak f la ligne \n" +j);
-                }
-                for (int i = 0; i < mot.length; i++) {
-                    switch(mot[i]){
-                        case "Snl_Start":
-                            continue;
-                        case "Snl_Int":
-                            if(!mot[0].equals("%..")) {
-                                i++;
-                                List<String> variable = new ArrayList<>();
-                                while (i < mot.length) {
-                                    if (this.isIdent(mot[i])) {
-                                        variable.add(mot[i]);
-                                        allIden.add(mot[i]);
-                                    } else {
-                                        if (!"%".equals(mot[i]) && !"%.".equals(mot[i]))
-                                            Result.append(mot[i] + " :respecte pas la syntaxe d'un identificateur f la ligne \n\n" + j);
-                                    }
-                                    i++;
-                                }
-                                idenInt = variable;
-
-                                if (!mot[i-1].equals("%.")) {
-                                    Result.append("ergg dir fin de ligne mat3ayinich la ligne \n\n" + j);
-                                }
+if(lexical) {
+    syntaxique = true;
+    List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
+    if (!checkSnlStart) {
+        Result.append("rak nasi Snl Start ya wahd lahmar\n");
+    }
+    if (!checkSnlClose) {
+        Result.append("rak nasi Snl Close ya wahd lahmar\n");
+    }
+    if (checkStart && (checkFinish == false)) {
+        Result.append("w bloc tabdah b Start w chkon adi ykamlah b finish nanak par exemple ? \n");
+    }
+    if (checkFinish && (checkStart == false)) {
+        Result.append("sahbi baghi nsa9sik min tkamal haja sama surement bditha aya dir tcho Start \n");
+    }
+    //      for (String ligne : lignes) {
+    for (int j = 0; j < lignes.size(); j++) {
+        lignes.set(j, lignes.get(j).replace("<", " < "));
+        lignes.set(j, lignes.get(j).replace(">", " > "));
+        lignes.set(j, lignes.get(j).replace(" , ", ","));
+        lignes.set(j, lignes.get(j).replace(", ", ","));
+        lignes.set(j, lignes.get(j).replace(" ,", ","));
+        lignes.set(j, lignes.get(j).replace("==", " == "));
+        lignes.set(j, lignes.get(j).replace(">=", " >= "));
+        lignes.set(j, lignes.get(j).replace("<=", " <= "));
+        String[] mot = lignes.get(j).split("( )|(,)");
+        if ("%".equals(mot[0]) || "%.".equals(mot[0])) {
+            Result.append("roh t3alam taktab commentaire ki syadak f la ligne \n" + j);
+        }
+        for (int i = 0; i < mot.length; i++) {
+            switch (mot[i]) {
+                case "Snl_Start":
+                    continue;
+                case "Snl_Int":
+                    if (!mot[0].equals("%..")) {
+                        i++;
+                        List<String> variable = new ArrayList<>();
+                        while (i < mot.length) {
+                            if (this.isIdent(mot[i])) {
+                                variable.add(mot[i]);
+                                allIden.add(mot[i]);
+                            } else {
+                                if (!"%".equals(mot[i]) && !"%.".equals(mot[i]))
+                                    Result.append(mot[i] + " :respecte pas la syntaxe d'un identificateur f la ligne \n\n" + j);
                             }
-                            continue;
-                        case "Set":
                             i++;
-                            if(!mot[0].equals("%..")) {
-                                if (this.isIdent(mot[i]) && (snail.isint(mot[i + 1]))) {
+                        }
+                        idenInt = variable;
 
-                                    if (allIden.contains(mot[i])) {
-                                        if (!idenInt.contains(mot[i])) {
-                                            Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f la ligne \n" + j);
-                                        }
-                                    } else {
-                                        Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                    }
-                                } else {
-                                    if (!this.isIdent(mot[i])) {
-                                        Result.append(mot[i] + "  :syntaxe please f la ligne \n" + j);
-                                    }
-                                    if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                        Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
+                        if (!mot[i - 1].equals("%.")) {
+                            Result.append("ergg dir fin de ligne mat3ayinich la ligne \n\n" + j);
+                        }
+                    }
+                    continue;
+                case "Set":
+                    i++;
+                    if (!mot[0].equals("%..")) {
+                        if (this.isIdent(mot[i]) && (snail.isint(mot[i + 1]))) {
 
-                                    }
+                            if (allIden.contains(mot[i])) {
+                                if (!idenInt.contains(mot[i])) {
+                                    Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f la ligne \n" + j);
                                 }
-
-                                if (this.isIdent(mot[i]) && (this.isFloat(mot[i + 1]))) {
-
-                                    if (allIden.contains(mot[i])) {
-                                        if (!idenFloat.contains(mot[i])) {
-                                            Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar f la ligne \n" + j);
-                                        }
-                                    } else {
-                                        Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                    }
-                                } else {
-                                    if (!this.isIdent(mot[i])) {
-                                        Result.append(mot[i] + "  :syntaxe please f la ligne \n" + j);
-                                    }
-                                    if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                        Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                    }
-                                }
-                                while(i<mot.length){i++;}
-                                if (!mot[i-1].equals("%.")) {
-                                    Result.append(mot[i-1]+" dir rfgr fin de ligne mat3ayinich la ligne \n\n" + j);
-                                }
+                            } else {
+                                Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
                             }
-                            continue;
-                        case "Snl_Real":
-                            if(!mot[0].equals("%..")) {
-                                i++;
-                                List<String> real = new ArrayList<>();
-                                while (i < mot.length) {
-                                    if (this.isIdent(mot[i])) {
-                                        real.add(mot[i]);
-                                        allIden.add(mot[i]);
-                                    } else {
-                                        if(!"%.".equals(mot[i]))
-                                            Result.append(mot[i] + "  :syntaxe f real please f la ligne \n" + j);
-                                    }
-
-                                    i++;
-                                }
-
-                                idenFloat = real;
-
-                                if (this.isIdent(mot[i - 1])) {
-                                    if (mot[i].equals("%.")) {
-
-                                    }
-                                }
-                                if (!mot[i-1].equals("%.")) {
-                                    Result.append(" dir fin de ligne mat3ayinich la ligne frgr \n\n" + j);
-                                }
+                        } else {
+                            if (!this.isIdent(mot[i])) {
+                                Result.append(mot[i] + "  :syntaxe please f la ligne \n" + j);
                             }
-                            continue;
-                        case "If":
+                            if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
+                                Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
+
+                            }
+                        }
+
+                        if (this.isIdent(mot[i]) && (this.isFloat(mot[i + 1]))) {
+
+                            if (allIden.contains(mot[i])) {
+                                if (!idenFloat.contains(mot[i])) {
+                                    Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar f la ligne \n" + j);
+                                }
+                            } else {
+                                Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
+                            }
+                        } else {
+                            if (!this.isIdent(mot[i])) {
+                                Result.append(mot[i] + "  :syntaxe please f la ligne \n" + j);
+                            }
+                            if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
+                                Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
+                            }
+                        }
+                        while (i < mot.length) {
                             i++;
-                            if(!"%".equals(mot[i])){
-                                Result.append(" rak nasi debut wala fin ta3 parenthese \n\n" + j);
-                            }
-                            if(!allIden.contains(mot[i+1])){
-                                Result.append(mot[i+1]+" marahach desclare \n\n" + j);
-                            }
-                            if(!this.isIdent(mot[i+1])){
-                                Result.append(mot[i+1]+" t3ayi ya lahbib syntaxe hmbk \n\n" + j);
-                            }
-                            if(!this.symbole(mot[i+3])){
-                                Result.append(mot[i+3]+" symbole chkon ydirha \n\n" + j);
-                            }
-
-                            if(!allIden.contains(mot[i+5])){
-                                Result.append(mot[i+5]+" marahach desclare \n\n" + j);
-                            }
-                            if(!this.isIdent(mot[i+5])){
-                                Result.append(mot[i+5]+" t3ayi ya lahbib syntaxe hmbk \n\n" + j);
-                            }
-
-                            if(!"%".equals(mot[i+6])){
-                                Result.append(" rak nasi debut wala fin ta3 parenthese \n\n" + j);
+                        }
+                        if (!mot[i - 1].equals("%.")) {
+                            Result.append(mot[i - 1] + " dir rfgr fin de ligne mat3ayinich la ligne \n\n" + j);
+                        }
+                    }
+                    continue;
+                case "Snl_Real":
+                    if (!mot[0].equals("%..")) {
+                        i++;
+                        List<String> real = new ArrayList<>();
+                        while (i < mot.length) {
+                            if (this.isIdent(mot[i])) {
+                                real.add(mot[i]);
+                                allIden.add(mot[i]);
+                            } else {
+                                if (!"%.".equals(mot[i]))
+                                    Result.append(mot[i] + "  :syntaxe f real please f la ligne \n" + j);
                             }
 
-                            if(!"do".equals(mot[i+7])){
-                                Result.append(" do chkon ydirha \n\n" + j);
-                            }
+                            i++;
+                        }
 
-                            continue;
-                        case "Else":
+                        idenFloat = real;
 
-                            continue;
-                        case "SnlSt":
-                            if(!mot[0].equals("%..")) {
-                                i++;
-                                String chaine_de_caractere = "";
-                                if (!"\"".equals(mot[i]))
-                                    Result.append(mot[i] + " syntaxe ya lahbib rak nasi \" rak taktaf fi text f la ligne \n" + j);
-                                chaine_de_caractere = chaine_de_caractere + mot[i + 1] + " ";
-                                while (i < mot.length) {
-                                    if (("\"".equals(mot[i]) == false) && ("%.".equals(mot[i]) == false)) {
-                                        chaine_de_caractere = chaine_de_caractere + mot[i] + " ";
-                                    }
-                                    i++;
-                                }
-                                if (!this.isChaine(chaine_de_caractere))
-                                    Result.append(" ha respecti kifach yakhatbo une chaine de caractere hambook f la ligne \n" + j);
-                                if (!"\"".equals(mot[i - 2]))
-                                    Result.append(mot[i - 2] + " wsh chikh min tabda katba kamalha b \" rak taktab fi text f la ligne \n" + j);
-                                if (!"%.".equals(mot[i - 1]))
-                                    Result.append(mot[i - 1] + " fin de ligne chkon ydirha ya kharaj rak taktab fi text f la ligne \n" + j);
+                        if (this.isIdent(mot[i - 1])) {
+                            if (mot[i].equals("%.")) {
 
                             }
-                            continue;
-                        case "Start":
+                        }
+                        if (!mot[i - 1].equals("%.")) {
+                            Result.append(" dir fin de ligne mat3ayinich la ligne frgr \n\n" + j);
+                        }
+                    }
+                    continue;
+                case "If":
+                    i++;
+                    if (!"%".equals(mot[i])) {
+                        Result.append(" rak nasi debut wala fin ta3 parenthese \n\n" + j);
+                    }
+                    if (!allIden.contains(mot[i + 1])) {
+                        Result.append(mot[i + 1] + " marahach desclare \n\n" + j);
+                    }
+                    if (!this.isIdent(mot[i + 1])) {
+                        Result.append(mot[i + 1] + " t3ayi ya lahbib syntaxe hmbk \n\n" + j);
+                    }
+                    if (!this.symbole(mot[i + 3])) {
+                        Result.append(mot[i + 3] + " symbole chkon ydirha \n\n" + j);
+                    }
 
-                            continue;
-                        case "Get":
-                            if(!mot[0].equals("%..")) {
-                                i++;
-                                if (this.isIdent(mot[i]) && "from".equals(mot[i + 1]) && this.isIdent(mot[i + 2])) {
-                                    if (!allIden.contains(mot[i])) {
-                                        Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                    }
-                                    if (!allIden.contains(mot[i + 2])) {
-                                        Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                    }
-                                    if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i + 2])) {
-                                        Result.append(mot[i] + " raha real matnajamch tadi int f la ligne \n" + j);
-                                    }
-                                    if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i + 2])) {
-                                        Result.append(mot[i] + " raha int matnajamch tadi real f la ligne \n" + j);
-                                    }
-                                } else {
-                                    if (!"from".equals(mot[i + 1])) {
-                                        Result.append("get variable from variable ya wahd lahmar f la ligne \n" + j);
-                                    }
-                                    if (!this.isIdent(mot[i])) {
-                                        Result.append(mot[i] + " ne respecte pas la syntaxe f la ligne \n" + j);
-                                    } else {
-                                        if (!allIden.contains(mot[i])) {
-                                            Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
-                                        }
-                                    }
-                                    if (!this.isIdent(mot[i + 2])) {
-                                        Result.append(mot[i + 2] + " ne respecte pas la syntaxe f la ligne \n" + j);
-                                    } else {
-                                        if (!allIden.contains(mot[i + 2])) {
-                                            Result.append(mot[i + 2] + " n'ai pas declare f la ligne \n" + j);
-                                        }
-                                    }
-                                }
-                                if (!mot[i-1].equals("%.")) {
-                                    Result.append("  dir fin de ligne mat3ayinich dfgf la ligne \n\n" + j);
-                                }
+                    if (!allIden.contains(mot[i + 5])) {
+                        Result.append(mot[i + 5] + " marahach desclare \n\n" + j);
+                    }
+                    if (!this.isIdent(mot[i + 5])) {
+                        Result.append(mot[i + 5] + " t3ayi ya lahbib syntaxe hmbk \n\n" + j);
+                    }
+
+                    if (!"%".equals(mot[i + 6])) {
+                        Result.append(" rak nasi debut wala fin ta3 parenthese \n\n" + j);
+                    }
+
+                    if (!"do".equals(mot[i + 7])) {
+                        Result.append(" do chkon ydirha \n\n" + j);
+                    }
+
+                    continue;
+                case "Else":
+
+                    continue;
+                case "SnlSt":
+                    if (!mot[0].equals("%..")) {
+                        i++;
+                        String chaine_de_caractere = "";
+                        if (!"\"".equals(mot[i]))
+                            Result.append(mot[i] + " syntaxe ya lahbib rak nasi \" rak taktaf fi text f la ligne \n" + j);
+                        chaine_de_caractere = chaine_de_caractere + mot[i + 1] + " ";
+                        while (i < mot.length) {
+                            if (("\"".equals(mot[i]) == false) && ("%.".equals(mot[i]) == false)) {
+                                chaine_de_caractere = chaine_de_caractere + mot[i] + " ";
                             }
-                            continue;
-                        case "Finish":
-
-                            continue;
-                        case "Snl_Put":
-                            if(!mot[0].equals("%..")) {
-                                i++;
-
-                                if (this.isIdent(mot[i])) {
-                                    if (!allIden.contains(mot[i])) {
-                                        while (i < mot.length) {
-                                            i++;
-                                        }
-                                        if ("\"".equals(mot[i - 2])) {
-                                            Result.append("nta tkamal katba bsh matabdach b \" f la ligne \n" + j);
-                                        }
-                                        if (!"%.".equals(mot[i - 1])) {
-                                            Result.append("fin de ligne chkon ydirha ya kharaj lawla w talya ta3ak f la ligne \n" + j);
-                                        }
-                                        if (!"%.".equals(mot[i - 1]) && !"\"".equals(mot[i - 2])) {
-                                            Result.append(mot[i - 2] + " n'ai pas declare f la ligne \n" + j);
-                                        }
-                                    }
-                                } else {
-
-                                    if (!"\"".equals(mot[i]))
-                                        Result.append(mot[i] + " syntaxe ya lahbib f la ligne \n" + j);
-
-                                    while (i < mot.length) {
-                                        i++;
-                                    }
-                                    if (!"\"".equals(mot[i - 2]))
-                                        Result.append(mot[i - 2] + " wsh chikh min tabda katba kamalha b \" f la ligne \n" + j);
-                                    if (!"%.".equals(mot[i - 1]))
-                                        Result.append(mot[i - 1] + " fin de ligne chkon ydirha ya kharaj f la ligne \n" + j);
-
-                                }
-                            }
-                            continue;
-                        case "%..":
-
-                            continue;
-                        case "Snl_Close":
-
-                            break;
+                            i++;
+                        }
+                        if (!this.isChaine(chaine_de_caractere))
+                            Result.append(" ha respecti kifach yakhatbo une chaine de caractere hambook f la ligne \n" + j);
+                        if (!"\"".equals(mot[i - 2]))
+                            Result.append(mot[i - 2] + " wsh chikh min tabda katba kamalha b \" rak taktab fi text f la ligne \n" + j);
+                        if (!"%.".equals(mot[i - 1]))
+                            Result.append(mot[i - 1] + " fin de ligne chkon ydirha ya kharaj rak taktab fi text f la ligne \n" + j);
 
                     }
-                }
+                    continue;
+                case "Start":
+
+                    continue;
+                case "Get":
+                    if (!mot[0].equals("%..")) {
+                        i++;
+                        if (this.isIdent(mot[i]) && "from".equals(mot[i + 1]) && this.isIdent(mot[i + 2])) {
+                            if (!allIden.contains(mot[i])) {
+                                Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
+                            }
+                            if (!allIden.contains(mot[i + 2])) {
+                                Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
+                            }
+                            if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i + 2])) {
+                                Result.append(mot[i] + " raha real matnajamch tadi int f la ligne \n" + j);
+                            }
+                            if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i + 2])) {
+                                Result.append(mot[i] + " raha int matnajamch tadi real f la ligne \n" + j);
+                            }
+                        } else {
+                            if (!"from".equals(mot[i + 1])) {
+                                Result.append("get variable from variable ya wahd lahmar f la ligne \n" + j);
+                            }
+                            if (!this.isIdent(mot[i])) {
+                                Result.append(mot[i] + " ne respecte pas la syntaxe f la ligne \n" + j);
+                            } else {
+                                if (!allIden.contains(mot[i])) {
+                                    Result.append(mot[i] + " n'ai pas declare f la ligne \n" + j);
+                                }
+                            }
+                            if (!this.isIdent(mot[i + 2])) {
+                                Result.append(mot[i + 2] + " ne respecte pas la syntaxe f la ligne \n" + j);
+                            } else {
+                                if (!allIden.contains(mot[i + 2])) {
+                                    Result.append(mot[i + 2] + " n'ai pas declare f la ligne \n" + j);
+                                }
+                            }
+                        }
+                        if (!mot[i - 1].equals("%.")) {
+                            Result.append("  dir fin de ligne mat3ayinich dfgf la ligne \n\n" + j);
+                        }
+                    }
+                    continue;
+                case "Finish":
+
+                    continue;
+                case "Snl_Put":
+                    if (!mot[0].equals("%..")) {
+                        i++;
+
+                        if (this.isIdent(mot[i])) {
+                            if (!allIden.contains(mot[i])) {
+                                while (i < mot.length) {
+                                    i++;
+                                }
+                                if ("\"".equals(mot[i - 2])) {
+                                    Result.append("nta tkamal katba bsh matabdach b \" f la ligne \n" + j);
+                                }
+                                if (!"%.".equals(mot[i - 1])) {
+                                    Result.append("fin de ligne chkon ydirha ya kharaj lawla w talya ta3ak f la ligne \n" + j);
+                                }
+                                if (!"%.".equals(mot[i - 1]) && !"\"".equals(mot[i - 2])) {
+                                    Result.append(mot[i - 2] + " n'ai pas declare f la ligne \n" + j);
+                                }
+                            }
+                        } else {
+
+                            if (!"\"".equals(mot[i]))
+                                Result.append(mot[i] + " syntaxe ya lahbib f la ligne \n" + j);
+
+                            while (i < mot.length) {
+                                i++;
+                            }
+                            if (!"\"".equals(mot[i - 2]))
+                                Result.append(mot[i - 2] + " wsh chikh min tabda katba kamalha b \" f la ligne \n" + j);
+                            if (!"%.".equals(mot[i - 1]))
+                                Result.append(mot[i - 1] + " fin de ligne chkon ydirha ya kharaj f la ligne \n" + j);
+
+                        }
+                    }
+                    continue;
+                case "%..":
+
+                    continue;
+                case "Snl_Close":
+
+                    break;
 
             }
+        }
+
+    }
+}else{
+    Result.append("\n\n\tvous devez effectuer l'analyse lexicale");
+}
         } catch (IOException ex) {
             Logger.getLogger(snail.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -605,112 +614,117 @@ public class snail extends javax.swing.JFrame {
         Result.setText("");
         Path path = Paths.get(chemin);
         try {
-            List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
-            for (String ligne : lignes) {
-                ligne = ligne.replace("<", " < ");
-                ligne = ligne.replace(">", " > ");
-                ligne = ligne.replace(" , ", ",");
-                ligne = ligne.replace(", ", ",");
-                ligne = ligne.replace(" ,", ",");
-                ligne = ligne.replace("==", " == ");
-                ligne = ligne.replace(">=", " >= ");
-                ligne = ligne.replace("<=", " <= ");
-                String[] mot = ligne.split("( )|(,)");
-                for (int i = 0; i < mot.length; i++) {
-                    switch(mot[i]) {
-                        case "Snl_Start":
-                            Result.append("main(){\n");
-                            continue;
-                        case "Snl_Int":
-                            i++;
-                            List<String> sint = new ArrayList<>();
-                            while (this.isIdent(mot[i])) {
-                                sint.add(mot[i]);
+            if (syntaxique && lexical) {
+                semantique = true;
+                List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
+                for (String ligne : lignes) {
+                    ligne = ligne.replace("<", " < ");
+                    ligne = ligne.replace(">", " > ");
+                    ligne = ligne.replace(" , ", ",");
+                    ligne = ligne.replace(", ", ",");
+                    ligne = ligne.replace(" ,", ",");
+                    ligne = ligne.replace("==", " == ");
+                    ligne = ligne.replace(">=", " >= ");
+                    ligne = ligne.replace("<=", " <= ");
+                    String[] mot = ligne.split("( )|(,)");
+                    for (int i = 0; i < mot.length; i++) {
+                        switch (mot[i]) {
+                            case "Snl_Start":
+                                Result.append("main(){\n");
+                                continue;
+                            case "Snl_Int":
                                 i++;
-                            }
-                            if (this.isIdent(mot[i - 1])) {
-                                if (mot[i].equals("%.")) {
-                                    Result.append("int ");
-                                    for (int j = 0; j < sint.size(); j++) {
-                                        if (j == sint.size() - 1) {
-                                            Result.append(sint.get(j));
-                                        } else {
-                                            Result.append(sint.get(j) + ",");
-                                        }
-                                    }
-                                    Result.append(";\n");
+                                List<String> sint = new ArrayList<>();
+                                while (this.isIdent(mot[i])) {
+                                    sint.add(mot[i]);
+                                    i++;
                                 }
-                            }
-                            break;
-                        case "Set":
-                            i++;
-                            if (this.isIdent(mot[i])
-                                    && (snail.isint(mot[i + 1]) || this.isFloat(mot[i + 1]))) {
-                                Result.append(mot[i] + " = " + mot[i + 1] + ";\n");
-                            }
-                            continue;
-                        case "Snl_Real":
-                            i++;
-                            List<String> sreal = new ArrayList<>();
-                            while (this.isIdent(mot[i])) {
-                                sreal.add(mot[i]);
+                                if (this.isIdent(mot[i - 1])) {
+                                    if (mot[i].equals("%.")) {
+                                        Result.append("int ");
+                                        for (int j = 0; j < sint.size(); j++) {
+                                            if (j == sint.size() - 1) {
+                                                Result.append(sint.get(j));
+                                            } else {
+                                                Result.append(sint.get(j) + ",");
+                                            }
+                                        }
+                                        Result.append(";\n");
+                                    }
+                                }
+                                break;
+                            case "Set":
                                 i++;
-                            }
-                            if (this.isIdent(mot[i - 1])) {
-                                if (mot[i].equals("%.")) {
-                                    Result.append("float ");
-                                    for (int j = 0; j < sreal.size(); j++) {
-                                        if (j == sreal.size() - 1) {
-                                            Result.append(sreal.get(j));
-                                        } else {
-                                            Result.append(sreal.get(j) + ",");
-                                        }
-                                    }
-                                    Result.append(";\n");
+                                if (this.isIdent(mot[i])
+                                        && (snail.isint(mot[i + 1]) || this.isFloat(mot[i + 1]))) {
+                                    Result.append(mot[i] + " = " + mot[i + 1] + ";\n");
                                 }
-                            }
-                            continue;
-                        case "Start":
-                            Result.append("{\n");
-                            continue;
-                        case "Get":
-                            i++;
-                            if (this.isIdent(mot[i]) && "from".equals(mot[i + 1])
-                                    && this.isIdent(mot[i + 2])) {
-                                Result.append(mot[i] + " = " + mot[i + 2] + ";\n");
-                            }
-                            continue;
-                        case "Finish":
-                            Result.append("}\n");
-                            continue;
-                        case "Snl_Put":
-                            i++;
-                            if (this.isIdent(mot[i])) {
-                                Result.append("System.out.println(" + mot[i] + ");\n");
-                            } else {
-                                Result.append("System.out.println(" + mot[i] + ");\n");
-                            }
+                                continue;
+                            case "Snl_Real":
+                                i++;
+                                List<String> sreal = new ArrayList<>();
+                                while (this.isIdent(mot[i])) {
+                                    sreal.add(mot[i]);
+                                    i++;
+                                }
+                                if (this.isIdent(mot[i - 1])) {
+                                    if (mot[i].equals("%.")) {
+                                        Result.append("float ");
+                                        for (int j = 0; j < sreal.size(); j++) {
+                                            if (j == sreal.size() - 1) {
+                                                Result.append(sreal.get(j));
+                                            } else {
+                                                Result.append(sreal.get(j) + ",");
+                                            }
+                                        }
+                                        Result.append(";\n");
+                                    }
+                                }
+                                continue;
+                            case "Start":
+                                Result.append("{\n");
+                                continue;
+                            case "Get":
+                                i++;
+                                if (this.isIdent(mot[i]) && "from".equals(mot[i + 1])
+                                        && this.isIdent(mot[i + 2])) {
+                                    Result.append(mot[i] + " = " + mot[i + 2] + ";\n");
+                                }
+                                continue;
+                            case "Finish":
+                                Result.append("}\n");
+                                continue;
+                            case "Snl_Put":
+                                i++;
+                                if (this.isIdent(mot[i])) {
+                                    Result.append("System.out.println(" + mot[i] + ");\n");
+                                } else {
+                                    Result.append("System.out.println(" + mot[i] + ");\n");
+                                }
 
-                            continue;
-                        case "%..":
-                            i++;
-                            Result.append("//" + Arrays.toString(ligne.split("%..")) + "\n");
-                            continue;
+                                continue;
+                            case "%..":
+                                i++;
+                                Result.append("//" + Arrays.toString(ligne.split("%..")) + "\n");
+                                continue;
 
-                        case "If":
-                            i++;
-                            Result.append("if(" + mot[i + 1] + mot[i + 2] + mot[i + 3] + ")\n");
-                            continue;
-                        case "Else":
-                            Result.append("else\n");
-                            continue;
-                        case "Snl_Close":
-                            Result.append("} ");
-                            break;
+                            case "If":
+                                i++;
+                                Result.append("if(" + mot[i + 1] + mot[i + 2] + mot[i + 3] + ")\n");
+                                continue;
+                            case "Else":
+                                Result.append("else\n");
+                                continue;
+                            case "Snl_Close":
+                                Result.append("} ");
+                                break;
 
+                        }
                     }
-                }
 
+                }
+            }else{
+                Result.append("\n\n\tvous devez effectuer l'analyse \n \t lexicale & syntaxique");
             }
         }
 
