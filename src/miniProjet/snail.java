@@ -179,6 +179,9 @@ public class snail extends javax.swing.JFrame {
         checkSnlClose = false;
         checkStart = false;
         checkFinish = false;
+        semantique = false;
+        syntaxique = false;
+        lexical = false;
         allIden.clear();
         idenInt.clear();
         idenFloat.clear();
