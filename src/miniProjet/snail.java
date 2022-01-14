@@ -230,6 +230,23 @@ public class snail extends javax.swing.JFrame {
                         case "SnlSt":
                             if(!mot[0].equals("%..")){
                                 Result.append("SnlSt    :Mot réservé pour déclaration d'une chaîne de caractère\n");
+                                i++;
+                                String chaine_de_caractere = "";
+                                chaine_de_caractere = chaine_de_caractere + mot[i + 1] + " ";
+                                while (i < mot.length) {
+                                    if (("\"".equals(mot[i]) == false) && ("%.".equals(mot[i]) == false)) {
+                                        chaine_de_caractere = chaine_de_caractere + mot[i] + " ";
+                                    }
+                                    i++;
+                                }
+                                if("%.".equals(mot[i-1])){
+                                    Result.append("%.  : reserver pour fin ligne.\n");
+                                }else if("%..".equals(mot[i-1])){
+                                    Result.append("%..  : reserver pour debut d'un commenteur.\n");
+                                }else if("%".equals(mot[i-1])){
+                                    Result.append("%   : parenthèse \n");
+                                }
+                                Result.append(chaine_de_caractere +" chaine de caractere\n");
                             }
                             break;
                         case "Snl_Real":
