@@ -478,35 +478,36 @@ public class snail extends javax.swing.JFrame {
                                 }
                                 continue;
                             case "If":
-                                i++;
-                                if (!"%".equals(mot[i])) {
-                                    Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne "  + (j+1) + "\n\n");
-                                }
-                                if (!allIden.contains(mot[i + 1])) {
-                                    Result.append(mot[i + 1] + " n'ai pas desclare dans la ligne "  + (j+1) + "\n\n");
-                                }
-                                if (!this.isIdent(mot[i + 1])) {
-                                    Result.append(mot[i + 1] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
-                                }
-                                if (!this.symbole(mot[i + 3])) {
-                                    Result.append("Vous avez oublie le symbole de la condition dans la ligne "  + (j+1) + "\n\n");
-                                }
+                                if (!mot[0].equals("%..")) {
+                                    i++;
+                                    if (!"%".equals(mot[i])) {
+                                        Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne " + (j + 1) + "\n\n");
+                                    }
+                                    if (!allIden.contains(mot[i + 1])) {
+                                        Result.append(mot[i + 1] + " n'ai pas desclare dans la ligne " + (j + 1) + "\n\n");
+                                    }
+                                    if (!this.isIdent(mot[i + 1])) {
+                                        Result.append(mot[i + 1] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne " + (j + 1) + "\n\n");
+                                    }
+                                    if (!this.symbole(mot[i + 3])) {
+                                        Result.append("Vous avez oublie le symbole de la condition dans la ligne " + (j + 1) + "\n\n");
+                                    }
 
-                                if (!allIden.contains(mot[i + 5])) {
-                                    Result.append(mot[i + 5] + " n'ai pas desclare dans la ligne "  + (j+1) + "\n\n");
-                                }
-                                if (!this.isIdent(mot[i + 5])) {
-                                    Result.append(mot[i + 5] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
-                                }
+                                    if (!allIden.contains(mot[i + 5])) {
+                                        Result.append(mot[i + 5] + " n'ai pas desclare dans la ligne " + (j + 1) + "\n\n");
+                                    }
+                                    if (!this.isIdent(mot[i + 5])) {
+                                        Result.append(mot[i + 5] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne " + (j + 1) + "\n\n");
+                                    }
 
-                                if (!"%".equals(mot[i + 6])) {
-                                    Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne "  + (j+1) + "\n\n");
-                                }
+                                    if (!"%".equals(mot[i + 6])) {
+                                        Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne " + (j + 1) + "\n\n");
+                                    }
 
-                                if (!"do".equals(mot[i + 7])) {
-                                    Result.append("Vous avez oublie 'do' dans la ligne"  + (j+1) + "\n\n");
+                                    if (!"do".equals(mot[i + 7])) {
+                                        Result.append("Vous avez oublie 'do' dans la ligne" + (j + 1) + "\n\n");
+                                    }
                                 }
-
                                 continue;
                             case "Else":
 
@@ -672,20 +673,22 @@ public class snail extends javax.swing.JFrame {
                             case "Snl_Int":
                                 break;
                             case "Set":
-                                i++;
+                                if (!mot[0].equals("%..")) {
+                                    i++;
                                     if (this.isIdent(mot[i]) && this.isFloat(mot[i + 1])) {
                                         if (allIden.contains(mot[i])) {
                                             if (!idenFloat.contains(mot[i])) {
                                                 Result.append("Variable int ne peut pas prendre une valeur real dans la ligne  " + (j + 1) + "\n\n");
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         if (allIden.contains(mot[i])) {
                                             if (!idenInt.contains(mot[i])) {
-                                                Result.append("Variable real ne peut pas prendre une valeur int dans la ligne "  + (j+1) + "\n\n");
+                                                Result.append("Variable real ne peut pas prendre une valeur int dans la ligne " + (j + 1) + "\n\n");
                                             }
                                         }
                                     }
+                                }
                                 continue;
                             case "Snl_Real":
 
@@ -694,12 +697,14 @@ public class snail extends javax.swing.JFrame {
 
                                 continue;
                             case "Get":
-                                i++;
-                                if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i + 2])) {
-                                         Result.append("Variable real ne peut pas prendre une valeur int dans la ligne "  + (j+1) + "\n\n");
-                                }
-                                if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i + 2])) {
-                                          Result.append("Variable int ne peut pas prendre une valeur real dans la ligne "  + (j+1) + "\n\n");
+                                if (!mot[0].equals("%..")) {
+                                    i++;
+                                    if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i + 2])) {
+                                        Result.append("Variable real ne peut pas prendre une valeur int dans la ligne " + (j + 1) + "\n\n");
+                                    }
+                                    if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i + 2])) {
+                                        Result.append("Variable int ne peut pas prendre une valeur real dans la ligne " + (j + 1) + "\n\n");
+                                    }
                                 }
                                 continue;
                             case "Finish":
