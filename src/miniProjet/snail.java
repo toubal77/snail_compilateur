@@ -351,16 +351,16 @@ public class snail extends javax.swing.JFrame {
                 syntaxique = true;
                 List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
                 if (!checkSnlStart) {
-                    Result.append("rak nasi Snl Start ya wahd lahmar\n");
+                    Result.append("Vous avez oublie Snl Start\n\n");
                 }
                 if (!checkSnlClose) {
-                    Result.append("rak nasi Snl Close ya wahd lahmar\n");
+                    Result.append("Vous avez oublie Snl Close\n\n");
                 }
                 if (checkStart && (checkFinish == false)) {
-                    Result.append("w bloc tabdah b Start w chkon adi ykamlah b finish nanak par exemple ? \n");
+                    Result.append("Vous avez oublie Finish\n\n");
                 }
                 if (checkFinish && (checkStart == false)) {
-                    Result.append("sahbi baghi nsa9sik min tkamal haja sama surement bditha aya dir tcho Start \n");
+                    Result.append("Vous avez oublie Start\n\n");
                 }
                 //      for (String ligne : lignes) {
                 for (int j = 0; j < lignes.size(); j++) {
@@ -375,7 +375,7 @@ public class snail extends javax.swing.JFrame {
                     lignes.set(j,lignes.get(j).replace("\t",""));
                     String[] mot = lignes.get(j).split("( )|(,)");
                     if ("%".equals(mot[0]) || "%.".equals(mot[0])) {
-                        Result.append("roh t3alam taktab commentaire ki syadak f la ligne" + (j+1) + "\n\n");
+                        Result.append("Vous avez mal déclaré le commentaire" + (j+1) + "\n\n");
                     }
                     for (int i = 0; i < mot.length; i++) {
                         switch (mot[i]) {
@@ -391,14 +391,14 @@ public class snail extends javax.swing.JFrame {
                                             allIden.add(mot[i]);
                                         } else {
                                             if (!"%".equals(mot[i]) && !"%.".equals(mot[i]))
-                                                Result.append(mot[i] + " :respecte pas la syntaxe d'un identificateur f la ligne"  + (j+1) + "\n\n");
+                                                Result.append(mot[i] + " : ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         }
                                         i++;
                                     }
                                     idenInt = variable;
 
                                     if (!mot[i - 1].equals("%.")) {
-                                        Result.append("ergg dir fin de ligne mat3ayinich f la ligne"  + (j+1) + "\n\n");
+                                        Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                     }
                                 }
                                 continue;
@@ -412,14 +412,14 @@ public class snail extends javax.swing.JFrame {
                                           //      Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f f la ligne"  + (j+1) + "\n\n");
                                             }
                                         } else {
-                                            Result.append(mot[i] + " n'ai pas declare f la ligne" + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " n'ai pas declare dans la ligne " + (j+1) + "\n\n");
                                         }
                                     } else {
                                         if (!this.isIdent(mot[i])) {
-                                            Result.append(mot[i] + "  :syntaxe please f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + "  : ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         }
                                         if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                            Result.append(mot[i] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " n'ai pas declare dans la ligne "  + (j+1) + "\n\n");
 
                                         }
                                     }
@@ -431,21 +431,21 @@ public class snail extends javax.swing.JFrame {
                                           //      Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar f la ligne"  + (j+1) + "\n\n");
                                             }
                                         } else {
-                                            Result.append(mot[i] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
                                         }
                                     } else {
                                         if (!this.isIdent(mot[i])) {
-                                            Result.append(mot[i] + "  :syntaxe please f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         }
                                         if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                            Result.append(mot[i] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
                                         }
                                     }
                                     while (i < mot.length) {
                                         i++;
                                     }
                                     if (!mot[i - 1].equals("%.")) {
-                                        Result.append(mot[i - 1] + " dir rfgr fin de ligne mat3ayinich f la ligne"  + (j+1) + "\n\n");
+                                        Result.append("Fin de ligne non declare dans la ligne"  + (j+1) + "\n\n");
                                     }
                                 }
                                 continue;
@@ -459,7 +459,7 @@ public class snail extends javax.swing.JFrame {
                                             allIden.add(mot[i]);
                                         } else {
                                             if (!"%.".equals(mot[i]))
-                                                Result.append(mot[i] + "  :syntaxe f real please f la ligne"  + (j+1) + "\n\n");
+                                                Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                         }
 
                                         i++;
@@ -473,38 +473,38 @@ public class snail extends javax.swing.JFrame {
                                         }
                                     }
                                     if (!mot[i - 1].equals("%.")) {
-                                        Result.append(" dir fin de ligne mat3ayinich la ligne frgr f la ligne"  + (j+1) + "\n\n");
+                                        Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                     }
                                 }
                                 continue;
                             case "If":
                                 i++;
                                 if (!"%".equals(mot[i])) {
-                                    Result.append(" rak nasi debut wala fin ta3 parenthese f la ligne"  + (j+1) + "\n\n");
+                                    Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne "  + (j+1) + "\n\n");
                                 }
                                 if (!allIden.contains(mot[i + 1])) {
-                                    Result.append(mot[i + 1] + " marahach desclare f la ligne"  + (j+1) + "\n\n");
+                                    Result.append(mot[i + 1] + " n'ai pas desclare dans la ligne "  + (j+1) + "\n\n");
                                 }
                                 if (!this.isIdent(mot[i + 1])) {
-                                    Result.append(mot[i + 1] + " t3ayi ya lahbib syntaxe hmbk f la ligne"  + (j+1) + "\n\n");
+                                    Result.append(mot[i + 1] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                 }
                                 if (!this.symbole(mot[i + 3])) {
-                                    Result.append(mot[i + 3] + " symbole chkon ydirha f la ligne"  + (j+1) + "\n\n");
+                                    Result.append("Vous avez oublie le symbole de la condition dans la ligne "  + (j+1) + "\n\n");
                                 }
 
                                 if (!allIden.contains(mot[i + 5])) {
-                                    Result.append(mot[i + 5] + " marahach desclaref la ligne"  + (j+1) + "\n\n");
+                                    Result.append(mot[i + 5] + " n'ai pas desclare dans la ligne "  + (j+1) + "\n\n");
                                 }
                                 if (!this.isIdent(mot[i + 5])) {
-                                    Result.append(mot[i + 5] + " t3ayi ya lahbib syntaxe hmbk f la ligne"  + (j+1) + "\n\n");
+                                    Result.append(mot[i + 5] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                 }
 
                                 if (!"%".equals(mot[i + 6])) {
-                                    Result.append(" rak nasi debut wala fin ta3 parenthese f la ligne"  + (j+1) + "\n\n");
+                                    Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne "  + (j+1) + "\n\n");
                                 }
 
                                 if (!"do".equals(mot[i + 7])) {
-                                    Result.append(" do chkon ydirha f la ligne"  + (j+1) + "\n\n");
+                                    Result.append("Vous avez oublie 'do' dans la ligne"  + (j+1) + "\n\n");
                                 }
 
                                 continue;
@@ -516,7 +516,7 @@ public class snail extends javax.swing.JFrame {
                                     i++;
                                     String chaine_de_caractere = "";
                                     if (!"\"".equals(mot[i]))
-                                        Result.append(mot[i] + " syntaxe ya lahbib rak nasi \" rak taktaf fi text f la ligne"  + (j+1) + "\n\n");
+                                        Result.append("Vous avez oublie \" au debut de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
                                     chaine_de_caractere = chaine_de_caractere + mot[i + 1] + " ";
                                     while (i < mot.length) {
                                         if (("\"".equals(mot[i]) == false) && ("%.".equals(mot[i]) == false)) {
@@ -525,11 +525,11 @@ public class snail extends javax.swing.JFrame {
                                         i++;
                                     }
                                     if (!this.isChaine(chaine_de_caractere))
-                                        Result.append(" ha respecti kifach yakhatbo une chaine de caractere hambook f la ligne"  + (j+1) + "\n\n");
+                                        Result.append("Vous ne respecte pas la syntaxe d'une chaine de caractere dans la ligne "  + (j+1) + "\n\n");
                                     if (!"\"".equals(mot[i - 2]))
-                                        Result.append(mot[i - 2] + " wsh chikh min tabda katba kamalha b \" rak taktab fi text f la ligne"  + (j+1) + "\n\n");
+                                        Result.append("Vous avez oublie \" a la fin de la chaine de caractere dans la ligne"  + (j+1) + "\n\n");
                                     if (!"%.".equals(mot[i - 1]))
-                                        Result.append(mot[i - 1] + " fin de ligne chkon ydirha ya kharaj rak taktab fi text f la ligne"  + (j+1) + "\n\n");
+                                        Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
 
                                 }
                                 continue;
@@ -541,38 +541,38 @@ public class snail extends javax.swing.JFrame {
                                     i++;
                                     if (this.isIdent(mot[i]) && "from".equals(mot[i + 1]) && this.isIdent(mot[i + 2])) {
                                         if (!allIden.contains(mot[i])) {
-                                            Result.append(mot[i] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " n'ai pas declare f la ligne "  + (j+1) + "\n\n");
                                         }
                                         if (!allIden.contains(mot[i + 2])) {
-                                            Result.append(mot[i] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " n'ai pas declare f la ligne "  + (j+1) + "\n\n");
                                         }
                                         if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i + 2])) {
-                                            Result.append(mot[i] + " raha real matnajamch tadi int f la ligne"  + (j+1) + "\n\n");
+                                       //     Result.append(mot[i] + " raha real matnajamch tadi int f la ligne"  + (j+1) + "\n\n");
                                         }
                                         if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i + 2])) {
-                                            Result.append(mot[i] + " raha int matnajamch tadi real f la ligne"  + (j+1) + "\n\n");
+                                      //      Result.append(mot[i] + " raha int matnajamch tadi real f la ligne"  + (j+1) + "\n\n");
                                         }
                                     } else {
                                         if (!"from".equals(mot[i + 1])) {
-                                            Result.append("get variable from variable ya wahd lahmar f la ligne"  + (j+1) + "\n\n");
+                                            Result.append("Vous avez oublie 'from' dans la ligne "  + (j+1) + "\n\n");
                                         }
                                         if (!this.isIdent(mot[i])) {
-                                            Result.append(mot[i] + " ne respecte pas la syntaxe f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         } else {
                                             if (!allIden.contains(mot[i])) {
-                                                Result.append(mot[i] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
+                                                Result.append(mot[i] + " n'ai pas declare f la ligne "  + (j+1) + "\n\n");
                                             }
                                         }
                                         if (!this.isIdent(mot[i + 2])) {
-                                            Result.append(mot[i + 2] + " ne respecte pas la syntaxe f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(mot[i + 2] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         } else {
                                             if (!allIden.contains(mot[i + 2])) {
-                                                Result.append(mot[i + 2] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
+                                                Result.append(mot[i + 2] + " n'ai pas declare f la ligne "  + (j+1) + "\n\n");
                                             }
                                         }
                                     }
                                     if (!mot[i - 1].equals("%.")) {
-                                        Result.append("  dir fin de ligne mat3ayinich dfgf f la ligne"  + (j+1) + "\n\n");
+                                        Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                     }
                                 }
                                 continue;
@@ -589,27 +589,27 @@ public class snail extends javax.swing.JFrame {
                                                 i++;
                                             }
                                             if ("\"".equals(mot[i - 2])) {
-                                                Result.append("nta tkamal katba bsh matabdach b \" f la ligne"  + (j+1) + "\n\n");
+                                                Result.append("Vous avez oublie \" au debut de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
                                             }
                                             if (!"%.".equals(mot[i - 1])) {
-                                                Result.append("fin de ligne chkon ydirha ya kharaj lawla w talya ta3ak f la ligne"  + (j+1) + "\n\n");
+                                                Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                             }
                                             if (!"%.".equals(mot[i - 1]) && !"\"".equals(mot[i - 2])) {
-                                                Result.append(mot[i - 2] + " n'ai pas declare f la ligne"  + (j+1) + "\n\n");
+                                                Result.append(mot[i - 2] + " n'ai pas declare f la ligne "  + (j+1) + "\n\n");
                                             }
                                         }
                                     } else {
 
                                         if (!"\"".equals(mot[i]))
-                                            Result.append(mot[i] + " syntaxe ya lahbib f la ligne"  + (j+1) + "\n\n");
+                                            Result.append("Vous avez oublie \" au debut de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
 
                                         while (i < mot.length) {
                                             i++;
                                         }
                                         if (!"\"".equals(mot[i - 2]))
-                                            Result.append(mot[i - 2] + " wsh chikh min tabda katba kamalha b \" f la ligne"  + (j+1) + "\n\n");
+                                            Result.append(" Vous avez oublie \" a la fin de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
                                         if (!"%.".equals(mot[i - 1]))
-                                            Result.append(mot[i - 1] + " fin de ligne chkon ydirha ya kharaj f la ligne"  + (j+1) + "\n\n");
+                                            Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
 
                                     }
                                 }
