@@ -300,7 +300,7 @@ public class snail extends javax.swing.JFrame {
                             Result.append("%. : reserver pour fin ligne.\n");
                             break;
                         case "%..":
-                            Result.append("%.. : reserver pour debut d'un commenteur.\n");
+                            Result.append("%.. : reserver pour debut d'un commentaire.\n");
                             break;
                         case "%":
                             Result.append("% : parenthèse \n");
