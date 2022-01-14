@@ -219,17 +219,17 @@ public class snail extends javax.swing.JFrame {
                         case "Snl_Start":
                             if(!mot[0].equals("%..")){
                                 checkSnlStart = true;
-                                Result.append("Snl_Start:Mot réservé début du programme\n");
+                                Result.append("Snl_Start : Mot réservé début du programme\n");
                             }
                             break;
                         case "Snl_Int":
                             if(!mot[0].equals("%..")){
-                                Result.append("Snl_Int    :Mot réservé pour déclaration d'un entier\n");
+                                Result.append("Snl_Int : Mot réservé pour déclaration d'un entier\n");
                             }
                             break;
                         case "SnlSt":
                             if(!mot[0].equals("%..")){
-                                Result.append("SnlSt    :Mot réservé pour déclaration d'une chaîne de caractère\n");
+                                Result.append("SnlSt : Mot réservé pour déclaration d'une chaîne de caractère\n");
                                 i++;
                                 String chaine_de_caractere = "";
                                 chaine_de_caractere = chaine_de_caractere + mot[i + 1] + " ";
@@ -240,97 +240,97 @@ public class snail extends javax.swing.JFrame {
                                     i++;
                                 }
                                 if("%.".equals(mot[i-1])){
-                                    Result.append("%.  : reserver pour fin ligne.\n");
+                                    Result.append("%. : reserver pour fin ligne.\n");
                                 }else if("%..".equals(mot[i-1])){
-                                    Result.append("%..  : reserver pour debut d'un commenteur.\n");
+                                    Result.append("%.. : reserver pour debut d'un commenteur.\n");
                                 }else if("%".equals(mot[i-1])){
-                                    Result.append("%   : parenthèse \n");
+                                    Result.append("% : parenthèse \n");
                                 }
                                 Result.append(chaine_de_caractere +" chaine de caractere\n");
                             }
                             break;
                         case "Snl_Real":
                             if(!mot[0].equals("%..")){
-                                Result.append("Snl_Real    :Mot réservé pour déclaration d'un réel\n");
+                                Result.append("Snl_Real : Mot réservé pour déclaration d'un réel\n");
                             }
                             break;
                         case "Snl_Close":
                             if(!mot[0].equals("%..")){
                                 checkSnlClose = true;
-                                Result.append("Snl_Close   :Mot réservé fin du programme\n");
+                                Result.append("Snl_Close : Mot réservé fin du programme\n");
                             }
                             break;
                         case "Get":
                             if(!mot[0].equals("%..")){
                                 Result.append(
-                                        "Get      :Mot réservé pour l'affectation d'une valeur de variable a une autre\n");
+                                        "Get : Mot réservé pour l'affectation d'une valeur de variable a une autre\n");
                             }
                             i++;
                             break;
                         case "Set":
                             if(!mot[0].equals("%..")){
-                                Result.append("Set     :Mot réservé pour l'affectation d'une valeur a une variable\n");
+                                Result.append("Set : Mot réservé pour l'affectation d'une valeur a une variable\n");
                             }
                             i++;
                             break;
                         case "If":
                             if(!mot[0].equals("%..")){
-                                Result.append("If      :Mot réservé pour une condition\n");
+                                Result.append("If : Mot réservé pour une condition\n");
                             }
                             i++;
                             break;
                         case "Else":
                             if(!mot[0].equals("%..")) {
-                                Result.append("Else   :Sinon\n");
+                                Result.append("Else : Sinon\n");
                             }
                             break;
                         case "Start":
                             if(!mot[0].equals("%..")){
                                 checkStart = true;
-                                Result.append("Start  :Début d'un bloc\n");
+                                Result.append("Start : Début d'un bloc\n");
                             }
                             break;
                         case "Finish":
                             if(!mot[0].equals("%..")){
                                 checkFinish = true;
-                                Result.append("Finish   :Fin d'un bloc\n");
+                                Result.append("Finish : Fin d'un bloc\n");
                             }
                             break;
                         case "%.":
-                            Result.append("%.  : reserver pour fin ligne.\n");
+                            Result.append("%. : reserver pour fin ligne.\n");
                             break;
                         case "%..":
-                            Result.append("%..  : reserver pour debut d'un commenteur.\n");
+                            Result.append("%.. : reserver pour debut d'un commenteur.\n");
                             break;
                         case "%":
-                            Result.append("%   : parenthèse \n");
+                            Result.append("% : parenthèse \n");
                             break;
                         case "Snl_Put":
                             if(!mot[0].equals("%..")){
-                                Result.append("Snl_Put   :Instruction d'affichage\n");
+                                Result.append("Snl_Put : Instruction d'affichage\n");
                             }
                             break;
                         default:
 
                             if (snail.isint(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                    Result.append(mot[i] + "  :entier\n");
+                                    Result.append(mot[i] + " : entier\n");
                             } else if (this.isFloat(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                    Result.append(mot[i] + "  :réel\n");
+                                    Result.append(mot[i] + " : réel\n");
                             }else if (this.isString(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                    Result.append(mot[i] + "  :chaîne de caractère\n");
+                                    Result.append(mot[i] + " : chaîne de caractère\n");
                             } else if (this.symbole(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                    Result.append(mot[i] + "  :symbole \n");
+                                    Result.append(mot[i] + " : symbole \n");
                             }else if ("\"".equals(mot[i])) {
-                                Result.append(mot[i] + "  :debut ou fin de chaine de caractere\n");
+                                Result.append(mot[i] + " : debut ou fin de chaine de caractere\n");
                             }else if (this.isSpace(mot[i])) {
-                                Result.append(mot[i] + "  :espace\n");
+                                Result.append(mot[i] + " : espace\n");
                             } else if (this.isIdent(mot[i]) || !this.isIdent(mot[i])) {
                                 if(!mot[0].equals("%.."))
-                                    Result.append(mot[i] + "  :identificateur\n");
+                                    Result.append(mot[i] + " : identificateur\n");
                             }
 
                     }
