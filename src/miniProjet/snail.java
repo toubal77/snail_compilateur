@@ -676,13 +676,13 @@ public class snail extends javax.swing.JFrame {
                                     if (this.isIdent(mot[i]) && this.isFloat(mot[i + 1])) {
                                         if (allIden.contains(mot[i])) {
                                             if (!idenFloat.contains(mot[i])) {
-                                                Result.append(mot[i] + "    : tadi i int hada makan ya wahd lahmar f la ligne " + (j + 1) + "\n\n");
+                                                Result.append("Variable int ne peut pas prendre une valeur real dans la ligne  " + (j + 1) + "\n\n");
                                             }
                                         }
                                     }else {
                                         if (allIden.contains(mot[i])) {
                                             if (!idenInt.contains(mot[i])) {
-                                                Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f f la ligne"  + (j+1) + "\n\n");
+                                                Result.append("Variable real ne peut pas prendre une valeur int dans la ligne "  + (j+1) + "\n\n");
                                             }
                                         }
                                     }
@@ -694,7 +694,13 @@ public class snail extends javax.swing.JFrame {
 
                                 continue;
                             case "Get":
-
+                                i++;
+                                if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i + 2])) {
+                                         Result.append("Variable real ne peut pas prendre une valeur int dans la ligne "  + (j+1) + "\n\n");
+                                }
+                                if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i + 2])) {
+                                          Result.append("Variable int ne peut pas prendre une valeur real dans la ligne "  + (j+1) + "\n\n");
+                                }
                                 continue;
                             case "Finish":
 
