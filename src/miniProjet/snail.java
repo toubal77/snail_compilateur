@@ -128,28 +128,28 @@ public class snail extends javax.swing.JFrame {
 
         jLabel2.setText("nom de fichier");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(180, 50, 190, 20);
+        jLabel2.setBounds(180, 30, 190, 20);
 
         charger_un_fichier.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 10)); // NOI18N
-        charger_un_fichier.setText("CHARGER LE FICHIER");
+        charger_un_fichier.setText("TELECHARGER LE FICHIER");
         charger_un_fichier.addActionListener(this::Charger_un_fichierActionPerformed);
         jPanel1.add(charger_un_fichier);
-        charger_un_fichier.setBounds(10, 40, 150, 40);
+        charger_un_fichier.setBounds(10, 20, 150, 40);
 
-        syntaxe.setText("A.SYNTAXIQUE");
+        syntaxe.setText("Syntaxe");
         syntaxe.addActionListener(this::SyntaxeActionPerformed);
         jPanel1.add(syntaxe);
-        syntaxe.setBounds(10, 230, 150, 40);
+        syntaxe.setBounds(310, 70 , 150, 40);
 
-        semantique.setText("A.SEMENTIQUE");
+       semantique.setText("Semantique");
         semantique.addActionListener(this::SemantiqueActionPerformed);
         jPanel1.add(semantique);
-        semantique.setBounds(10, 320, 150, 40);
+        semantique.setBounds(610, 70, 150, 40);
 
-        lexique.setText("A.LEXICAL");
+        lexique.setText("Lexique");
         lexique.addActionListener(this::LexiqueActionPerformed);
         jPanel1.add(lexique);
-        lexique.setBounds(10, 140, 150, 40);
+        lexique.setBounds(10, 70, 150, 40);
 
         Result.setColumns(20);
         Result.setRows(5);
@@ -157,11 +157,12 @@ public class snail extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Result);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(416, 6, 380, 470);
+        jScrollPane1.setBounds(10, 130, 775, 330);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/miniprojet/snailm.png")))); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(-6, -6, 830, 510);
+
+      //  jLabel1.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/miniprojet/snail_pictures.jpg")))); // NOI18N
+      //  jPanel1.add(jLabel1);
+      //  jLabel1.setBounds(-6, -6, 830, 510);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
