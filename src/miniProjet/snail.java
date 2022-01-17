@@ -439,7 +439,7 @@ public class snail extends javax.swing.JFrame {
                                             Result.append(mot[i] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         }
                                         if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                            Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
+                                  //          Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
                                         }
                                     }
                                     while (i < mot.length) {
@@ -526,13 +526,14 @@ public class snail extends javax.swing.JFrame {
                                         }
                                         i++;
                                     }
-                                    if (!this.isChaine(chaine_de_caractere))
-                                        Result.append("Vous ne respecte pas la syntaxe d'une chaine de caractere dans la ligne "  + (j+1) + "\n\n");
-                                    if (!"\"".equals(mot[i - 2]))
-                                        Result.append("Vous avez oublie \" a la fin de la chaine de caractere dans la ligne"  + (j+1) + "\n\n");
-                                    if (!"%.".equals(mot[i - 1]))
-                                        Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
-
+                                    if (!"%.".equals(mot[i - 1])) {
+                                        Result.append("Fin de ligne non declare dans la ligne " + (j + 1) + "\n\n");
+                                    }
+                                    if (!this.isChaine(chaine_de_caractere)) {
+                                        Result.append("Vous ne respecte pas la syntaxe d'une chaine de caractere dans la ligne " + (j + 1) + "\n\n");
+                                    } if (!"\"".equals(mot[i - 2])) {
+                                        Result.append("Vous avez oublie \" a la fin de la chaine de caractere dans la ligne" + (j + 1) + "\n\n");
+                                    }
                                 }
                                 continue;
                             case "Start":
@@ -587,8 +588,16 @@ public class snail extends javax.swing.JFrame {
 
                                     if (this.isIdent(mot[i])) {
                                         if (!allIden.contains(mot[i])) {
+                                            String chaine_de_caractere = "";
+                                            chaine_de_caractere = chaine_de_caractere + mot[i + 1] + " ";
                                             while (i < mot.length) {
+                                                if (("\"".equals(mot[i]) == false) && ("%.".equals(mot[i]) == false)) {
+                                                    chaine_de_caractere = chaine_de_caractere + mot[i] + " ";
+                                                }
                                                 i++;
+                                            }
+                                            if (!this.isChaine(chaine_de_caractere)) {
+                                                Result.append("Vous ne respecte pas la syntaxe d'une chaine de caractere dans la ligne " + (j + 1) + "\n\n");
                                             }
                                             if ("\"".equals(mot[i - 2])) {
                                                 Result.append("Vous avez oublie \" au debut de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
