@@ -537,21 +537,10 @@ public class snail extends javax.swing.JFrame {
 
                                     if (this.isIdent(mot[i])) {
                                         if (!allIden.contains(mot[i])) {
-                                            String chaine_de_caractere = "";
-                                            chaine_de_caractere = chaine_de_caractere + mot[i + 1] + " ";
                                             while (i < mot.length) {
-                                                if (("\"".equals(mot[i]) == false) && ("%.".equals(mot[i]) == false)) {
-                                                    chaine_de_caractere = chaine_de_caractere + mot[i] + " ";
-                                                }
                                                 i++;
                                             }
-                                            if (!this.isChaine(chaine_de_caractere)) {
-                                                Result.append("Vous ne respecte pas la syntaxe d'une chaine de caractere dans la ligne " + (j + 1) + "\n\n");
-                                            }
-                                            if ("\"".equals(mot[i - 2])) {
-                                                Result.append("Vous avez oublie \" au debut de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
-                                            }
-                                            if (!"%.".equals(mot[i - 1])) {
+                                          if (!"%.".equals(mot[i - 1])) {
                                                 Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                             }
                                             if (!"%.".equals(mot[i - 1]) && !"\"".equals(mot[i - 2])) {
@@ -563,11 +552,20 @@ public class snail extends javax.swing.JFrame {
                                         if (!"\"".equals(mot[i]))
                                             Result.append("Vous avez oublie \" au debut de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
 
+                                        String chaine_de_caractere = "";
+                                        chaine_de_caractere = chaine_de_caractere + mot[i + 1] + " ";
                                         while (i < mot.length) {
+                                            if (("\"".equals(mot[i]) == false) && ("%.".equals(mot[i]) == false)) {
+                                                chaine_de_caractere = chaine_de_caractere + mot[i] + " ";
+                                            }
                                             i++;
                                         }
+                                        if (!this.isChaine(chaine_de_caractere)) {
+                                            Result.append("Vous ne respecte pas la syntaxe d'une chaine de caractere dans la ligne " + (j + 1) + "\n\n");
+                                        }
+
                                         if (!"\"".equals(mot[i - 2]))
-                                            Result.append(" Vous avez oublie \" a la fin de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
+                                            Result.append(mot[i - 2] +" Vous avez oublie \" a la fin de la chaine de caractere dans la ligne "  + (j+1) + "\n\n");
                                         if (!"%.".equals(mot[i - 1]))
                                             Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
 
@@ -664,7 +662,16 @@ public class snail extends javax.swing.JFrame {
 
                                 continue;
                             case "Snl_Put":
+                                if (!mot[0].equals("%..")) {
+                                    i++;
+                                    if (this.isIdent(mot[i])) {
 
+                                        if (!allIden.contains(mot[i])) {
+                                                Result.append(mot[i] + " n'ai pas declare dans la ligne "  + (j+1) + "\n\n");
+
+                                        }
+                                    }
+                                }
                                 continue;
                             case "%..":
 
