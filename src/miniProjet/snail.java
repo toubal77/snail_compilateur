@@ -373,7 +373,7 @@ public class snail extends javax.swing.JFrame {
                     lignes.set(j,lignes.get(j).replace("\t",""));
                     String[] mot = lignes.get(j).split("( )|(,)");
                     if ("%".equals(mot[0]) || "%.".equals(mot[0])) {
-                        Result.append("Vous avez mal déclaré le commentaire" + (j+1) + "\n\n");
+                        Result.append("Vous avez mal déclaré le commentaire dans la ligne " + (j+1) + "\n\n");
                     }
                     for (int i = 0; i < mot.length; i++) {
                         switch (mot[i]) {
@@ -424,21 +424,13 @@ public class snail extends javax.swing.JFrame {
                                         if (this.isIdent(mot[i])) {
                                             real.add(mot[i]);
                                             allIden.add(mot[i]);
-                                        } else {
-                                            if (!"%.".equals(mot[i]))
-                                                Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                         }
-
                                         i++;
                                     }
 
                                     idenFloat = real;
 
-                                    if (this.isIdent(mot[i - 1])) {
-                                        if (mot[i].equals("%.")) {
 
-                                        }
-                                    }
                                     if (!mot[i - 1].equals("%.")) {
                                         Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                     }
@@ -450,27 +442,18 @@ public class snail extends javax.swing.JFrame {
                                     if (!"%".equals(mot[i])) {
                                         Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne " + (j + 1) + "\n\n");
                                     }
-                                    if (!allIden.contains(mot[i + 1])) {
-                                        Result.append(mot[i + 1] + " n'ai pas desclare dans la ligne " + (j + 1) + "\n\n");
-                                    }
                                     if (!this.isIdent(mot[i + 1])) {
                                         Result.append(mot[i + 1] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne " + (j + 1) + "\n\n");
                                     }
                                     if (!this.symbole(mot[i + 3])) {
                                         Result.append("Vous avez oublie le symbole de la condition dans la ligne " + (j + 1) + "\n\n");
                                     }
-
-                                    if (!allIden.contains(mot[i + 5])) {
-                                        Result.append(mot[i + 5] + " n'ai pas desclare dans la ligne " + (j + 1) + "\n\n");
-                                    }
                                     if (!this.isIdent(mot[i + 5])) {
                                         Result.append(mot[i + 5] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne " + (j + 1) + "\n\n");
                                     }
-
                                     if (!"%".equals(mot[i + 6])) {
                                         Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne " + (j + 1) + "\n\n");
                                     }
-
                                     if (!"do".equals(mot[i + 7])) {
                                         Result.append("Vous avez oublie 'do' dans la ligne" + (j + 1) + "\n\n");
                                     }
@@ -688,7 +671,18 @@ public class snail extends javax.swing.JFrame {
                                 continue;
 
                             case "If":
+                                if (!mot[0].equals("%..")) {
+                                    i++;
 
+                                    if (!allIden.contains(mot[i + 1])) {
+                                        Result.append(mot[i + 1] + " n'ai pas desclare dans la ligne " + (j + 1) + "\n\n");
+                                    }
+
+                                    if (!allIden.contains(mot[i + 5])) {
+                                        Result.append(mot[i + 5] + " n'ai pas desclare dans la ligne " + (j + 1) + "\n\n");
+                                    }
+
+                                }
                                 continue;
                             case "Else":
 
