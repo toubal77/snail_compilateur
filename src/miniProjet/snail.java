@@ -574,8 +574,8 @@ public class snail extends javax.swing.JFrame {
                                             }
                                         }
                                     }
-                                    if (!mot[i - 1].equals("%.")) {
-                                        Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
+                                    if (!mot[i+3].equals("%.")) {
+                                        Result.append(mot[i+3] +"Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                     }
                                 }
                                 continue;
