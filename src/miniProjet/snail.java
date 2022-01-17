@@ -204,14 +204,11 @@ public class snail extends javax.swing.JFrame {
             List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
 
             for (String ligne : lignes) {
-               // ligne = ligne.replace("<", " < ");
-                //ligne = ligne.replace(">", " > ");
+
                  ligne = ligne.replace(" , ", ",");
                 ligne = ligne.replace(", ", ",");
                 ligne = ligne.replace(" ,", ",");
-                // ligne = ligne.replace("==", " == ");
-                // ligne = ligne.replace(">=", " >= ");
-                // ligne = ligne.replace("<=", " <= ");
+
                 ligne = ligne.replace("\t","");
                 String[] mot = ligne.split("( )|(,)");
 
@@ -406,40 +403,9 @@ public class snail extends javax.swing.JFrame {
                             case "Set":
                                 i++;
                                 if (!mot[0].equals("%..")) {
-                                    if (this.isIdent(mot[i]) && (snail.isint(mot[i + 1]))) {
-
-                                        if (allIden.contains(mot[i])) {
-                                            if (!idenInt.contains(mot[i])) {
-                                          //      Result.append(mot[i] + "    :tadi i real hada makan ya wahd lahmar f f la ligne"  + (j+1) + "\n\n");
-                                            }
-                                        } else {
-                                         //   Result.append(mot[i] + " n'ai pas declare dans la ligne " + (j+1) + "\n\n");
-                                        }
-                                    } else {
+                                    if (!(this.isIdent(mot[i]) && (snail.isint(mot[i + 1])))) {
                                         if (!this.isIdent(mot[i])) {
                                             Result.append(mot[i] + "  : ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
-                                        }
-                                        if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                         //   Result.append(mot[i] + " n'ai pas declare dans la ligne "  + (j+1) + "\n\n");
-
-                                        }
-                                    }
-
-                                    if (this.isIdent(mot[i]) && (this.isFloat(mot[i + 1]))) {
-
-                                        if (allIden.contains(mot[i])) {
-                                            if (!idenFloat.contains(mot[i])) {
-                                          //      Result.append(mot[i] + "    :tadi i int hada makan ya wahd lahmar f la ligne"  + (j+1) + "\n\n");
-                                            }
-                                        } else {
-                                         //   Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
-                                        }
-                                    } else {
-                                        if (!this.isIdent(mot[i])) {
-                                      //      Result.append(mot[i] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
-                                        }
-                                        if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                  //          Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
                                         }
                                     }
                                     while (i < mot.length) {
@@ -686,50 +652,12 @@ public class snail extends javax.swing.JFrame {
                                 if (!mot[0].equals("%..")) {
                                     i++;
                                     if (!mot[0].equals("%..")) {
-                                        //            if (this.isIdent(mot[i]) && (snail.isint(mot[i + 1]))) {
-
-                                            //            if (allIden.contains(mot[i])) {
-
-                                                // } else {
-                                                //  Result.append(mot[i] + " n'ai pas declare dans la ligne " + (j+1) + "\n\n");
-                                                //  }
-                                            //   }
-                                        //else {
-                                            //              if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                                //                          Result.append(mot[i] + " n'ai pas declare dans la ligne "  + (j+1) + "\n\n");
-
-                                                //                 }
-                           //             }
-
                                         if (this.isIdent(mot[i])) {
-
-                                            if (allIden.contains(mot[i])) {
-                                            } else {
+                                            if (!allIden.contains(mot[i])) {
                                                 Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
-                                            }
-                                        } else {
-                                            if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
-                                         //                 Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
                                             }
                                         }
                                     }
-
-
-
-//                                    i++;
-                                    //                                  if (this.isIdent(mot[i]) && this.isFloat(mot[i + 1])) {
-                                    //                                   if (allIden.contains(mot[i])) {
-                                    //      if (!idenFloat.contains(mot[i])) {
-                                    //          Result.append("Variable int ne peut pas prendre une valeur real dans la ligne  " + (j + 1) + "\n\n");
-                                    //      }
-                                    //  }
-                                    // } else {
-                                    //  if (allIden.contains(mot[i])) {
-                                    //      if (!idenInt.contains(mot[i])) {
-                                    //          Result.append("Variable real ne peut pas prendre une valeur int dans la ligne " + (j + 1) + "\n\n");
-                                    //      }
-                                    //  }
-                                    //}
                                     }
                                 continue;
                             case "Snl_Real":
