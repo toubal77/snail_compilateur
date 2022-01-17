@@ -436,7 +436,7 @@ public class snail extends javax.swing.JFrame {
                                         }
                                     } else {
                                         if (!this.isIdent(mot[i])) {
-                                            Result.append(mot[i] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
+                                      //      Result.append(mot[i] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         }
                                         if (this.isIdent(mot[i]) && !allIden.contains(mot[i])) {
                                   //          Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
