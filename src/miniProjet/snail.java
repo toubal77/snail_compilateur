@@ -638,6 +638,12 @@ public class snail extends javax.swing.JFrame {
                                                 Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
                                             }
                                         }
+                                        if (idenFloat.contains(mot[i]) && this.isint(mot[i+1])) {
+                                            Result.append("Variable real ne peut pas prendre une valeur int dans la ligne " + (j + 1) + "\n\n");
+                                        }
+                                        if (idenInt.contains(mot[i]) && this.isFloat(mot[i+1])) {
+                                            Result.append("Variable int ne peut pas prendre une valeur real dans la ligne " + (j + 1) + "\n\n");
+                                        }
                                     }
                                     }
                                 continue;
