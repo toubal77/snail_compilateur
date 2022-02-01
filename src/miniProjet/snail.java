@@ -359,13 +359,13 @@ public class snail extends javax.swing.JFrame {
                                         if (fun.isIdent(mot[i])) {
                                             real.add(mot[i]);
                                             allIden.add(mot[i]);
-                                        }
+                                        } else {
+                                        if (!"%".equals(mot[i]) && !"%.".equals(mot[i]))
+                                            Result.append(mot[i] + " : ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
+                                    }
                                         i++;
                                     }
-
                                     idenFloat = real;
-
-
                                     if (!mot[i - 1].equals("%.")) {
                                         Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                     }
