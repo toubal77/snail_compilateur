@@ -33,55 +33,7 @@ public class snail extends javax.swing.JFrame {
     List<String> allIden = new ArrayList<String>();
     List<String> idenInt = new ArrayList<String>();
     List<String> idenFloat = new ArrayList<String>();
-
-    public boolean isIdent(String str) {
-        String regex = "^[a-z][_a-zA-Z_0-9]*$";
-        return Pattern.matches(regex, str);
-    }
-
-    static boolean isint(String str) {
-        String regex = "[0-9]+";
-        return Pattern.matches(regex, str);
-
-    }
-
-    boolean isChaine(String str) {
-        try {
-            String regex = "^[a-zA-Z0-9' ]+$";
-            return Pattern.matches(regex, str);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    boolean isSpace(String str) {
-        try {
-            String regex = " +";
-            return Pattern.matches(regex, str);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    boolean isFloat(String str) {
-        try {
-            String regex = "[0-9]+.[0-9]+";
-            return Pattern.matches(regex, str);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    boolean isString(String str) {
-        try {
-            String regex = "[a-zA-Z0-9\\'-]+[a-zA-Z0-9]+";
-            return Pattern.matches(regex, str);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-    }
-
+    functionss fun = new functionss();
     public snail() {
         initComponents();
         setResizable(false);
@@ -89,12 +41,6 @@ public class snail extends javax.swing.JFrame {
     }
 
     String chemin;
-
-    boolean symbole(String str) {
-        boolean bool;
-        bool = "<".equals(str) || ">".equals(str) || "<=".equals(str) || ">=".equals(str) || "==".equals(str);
-        return bool;
-    }
 
     private void initComponents() {
 
@@ -299,23 +245,23 @@ public class snail extends javax.swing.JFrame {
                             break;
                         default:
 
-                            if (snail.isint(mot[i])) {
+                            if (fun.isint(mot[i])) {
                                 if(!mot[0].equals("%.."))
                                     Result.append(mot[i] + " : entier\n");
-                            } else if (this.isFloat(mot[i])) {
+                            } else if (fun.isFloat(mot[i])) {
                                 if(!mot[0].equals("%.."))
                                     Result.append(mot[i] + " : réel\n");
-                            }else if (this.isString(mot[i])) {
+                            }else if (fun.isString(mot[i])) {
                                 if(!mot[0].equals("%.."))
                                     Result.append(mot[i] + " : chaîne de caractère\n");
-                            } else if (this.symbole(mot[i])) {
+                            } else if (fun.symbole(mot[i])) {
                                 if(!mot[0].equals("%.."))
                                     Result.append(mot[i] + " : symbole \n");
                             }else if ("\"".equals(mot[i])) {
                                 Result.append(mot[i] + " : debut ou fin de chaine de caractere\n");
-                            }else if (this.isSpace(mot[i])) {
+                            }else if (fun.isSpace(mot[i])) {
                                 Result.append(mot[i] + " : espace\n");
-                            } else if (this.isIdent(mot[i]) || !this.isIdent(mot[i])) {
+                            } else if (fun.isIdent(mot[i]) || !fun.isIdent(mot[i])) {
                                 if(!mot[0].equals("%.."))
                                     Result.append(mot[i] + " : identificateur\n");
                             }
@@ -373,7 +319,7 @@ public class snail extends javax.swing.JFrame {
                                     i++;
                                     List<String> variable = new ArrayList<>();
                                     while (i < mot.length) {
-                                        if (this.isIdent(mot[i])) {
+                                        if (fun.isIdent(mot[i])) {
                                             variable.add(mot[i]);
                                             allIden.add(mot[i]);
                                         } else {
@@ -392,8 +338,8 @@ public class snail extends javax.swing.JFrame {
                             case "Set":
                                 i++;
                                 if (!mot[0].equals("%..")) {
-                                    if (!(this.isIdent(mot[i]) && (snail.isint(mot[i + 1])))) {
-                                        if (!this.isIdent(mot[i])) {
+                                    if (!(fun.isIdent(mot[i]) && (fun.isint(mot[i + 1])))) {
+                                        if (!fun.isIdent(mot[i])) {
                                             Result.append(mot[i] + "  : ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         }
                                     }
@@ -410,7 +356,7 @@ public class snail extends javax.swing.JFrame {
                                     i++;
                                     List<String> real = new ArrayList<>();
                                     while (i < mot.length) {
-                                        if (this.isIdent(mot[i])) {
+                                        if (fun.isIdent(mot[i])) {
                                             real.add(mot[i]);
                                             allIden.add(mot[i]);
                                         }
@@ -431,13 +377,13 @@ public class snail extends javax.swing.JFrame {
                                     if (!"%".equals(mot[i])) {
                                         Result.append("Vous avez oublie debut ou fin de parenthese dans la ligne " + (j + 1) + "\n\n");
                                     }
-                                    if (!this.isIdent(mot[i + 1])) {
+                                    if (!fun.isIdent(mot[i + 1])) {
                                         Result.append(mot[i + 1] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne " + (j + 1) + "\n\n");
                                     }
-                                    if (!this.symbole(mot[i + 3])) {
+                                    if (!fun.symbole(mot[i + 3])) {
                                         Result.append("Vous avez oublie le symbole de la condition dans la ligne " + (j + 1) + "\n\n");
                                     }
-                                    if (!this.isIdent(mot[i + 5])) {
+                                    if (!fun.isIdent(mot[i + 5])) {
                                         Result.append(mot[i + 5] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne " + (j + 1) + "\n\n");
                                     }
                                     if (!"%".equals(mot[i + 6])) {
@@ -467,7 +413,7 @@ public class snail extends javax.swing.JFrame {
                                     if (!"%.".equals(mot[i - 1])) {
                                         Result.append("Fin de ligne non declare dans la ligne " + (j + 1) + "\n\n");
                                     }
-                                    if (!this.isChaine(chaine_de_caractere)) {
+                                    if (!fun.isChaine(chaine_de_caractere)) {
                                         Result.append("Vous ne respecte pas la syntaxe d'une chaine de caractere dans la ligne " + (j + 1) + "\n\n");
                                     } if (!"\"".equals(mot[i - 2])) {
                                         Result.append("Vous avez oublie \" a la fin de la chaine de caractere dans la ligne" + (j + 1) + "\n\n");
@@ -480,7 +426,7 @@ public class snail extends javax.swing.JFrame {
                             case "Get":
                                 if (!mot[0].equals("%..")) {
                                     i++;
-                                    if (this.isIdent(mot[i]) && "from".equals(mot[i + 1]) && this.isIdent(mot[i + 2])) {
+                                    if (fun.isIdent(mot[i]) && "from".equals(mot[i + 1]) && fun.isIdent(mot[i + 2])) {
                                         if (!allIden.contains(mot[i])) {
                                             Result.append(mot[i] + " n'ai pas declare f la ligne "  + (j+1) + "\n\n");
                                         }
@@ -497,14 +443,14 @@ public class snail extends javax.swing.JFrame {
                                         if (!"from".equals(mot[i + 1])) {
                                             Result.append("Vous avez oublie 'from' dans la ligne "  + (j+1) + "\n\n");
                                         }
-                                        if (!this.isIdent(mot[i])) {
+                                        if (!fun.isIdent(mot[i])) {
                                             Result.append(mot[i] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         } else {
                                             if (!allIden.contains(mot[i])) {
                                                 Result.append(mot[i] + " n'ai pas declare f la ligne "  + (j+1) + "\n\n");
                                             }
                                         }
-                                        if (!this.isIdent(mot[i + 2])) {
+                                        if (!fun.isIdent(mot[i + 2])) {
                                             Result.append(mot[i + 2] + " ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
                                         } else {
                                             if (!allIden.contains(mot[i + 2])) {
@@ -524,7 +470,7 @@ public class snail extends javax.swing.JFrame {
                                 if (!mot[0].equals("%..")) {
                                     i++;
 
-                                    if (this.isIdent(mot[i])) {
+                                    if (fun.isIdent(mot[i])) {
                                         if (!allIden.contains(mot[i])) {
                                             while (i < mot.length) {
                                                 i++;
@@ -549,7 +495,7 @@ public class snail extends javax.swing.JFrame {
                                             }
                                             i++;
                                         }
-                                        if (!this.isChaine(chaine_de_caractere)) {
+                                        if (!fun.isChaine(chaine_de_caractere)) {
                                             Result.append("Vous ne respecte pas la syntaxe d'une chaine de caractere dans la ligne " + (j + 1) + "\n\n");
                                         }
 
@@ -622,15 +568,15 @@ public class snail extends javax.swing.JFrame {
                                 if (!mot[0].equals("%..")) {
                                     i++;
                                     if (!mot[0].equals("%..")) {
-                                        if (this.isIdent(mot[i])) {
+                                        if (fun.isIdent(mot[i])) {
                                             if (!allIden.contains(mot[i])) {
                                                 Result.append(mot[i] + " n'ai pas declare dans la ligne"  + (j+1) + "\n\n");
                                             }
                                         }
-                                        if (idenFloat.contains(mot[i]) && this.isint(mot[i+1])) {
+                                        if (idenFloat.contains(mot[i]) && fun.isint(mot[i+1])) {
                                             Result.append("Variable real ne peut pas prendre une valeur int dans la ligne " + (j + 1) + "\n\n");
                                         }
-                                        if (idenInt.contains(mot[i]) && this.isFloat(mot[i+1])) {
+                                        if (idenInt.contains(mot[i]) && fun.isFloat(mot[i+1])) {
                                             Result.append("Variable int ne peut pas prendre une valeur real dans la ligne " + (j + 1) + "\n\n");
                                         }
                                     }
@@ -659,7 +605,7 @@ public class snail extends javax.swing.JFrame {
                             case "Snl_Put":
                                 if (!mot[0].equals("%..")) {
                                     i++;
-                                    if (this.isIdent(mot[i])) {
+                                    if (fun.isIdent(mot[i])) {
 
                                         if (!allIden.contains(mot[i])) {
                                                 Result.append(mot[i] + " n'ai pas declare dans la ligne "  + (j+1) + "\n\n");
