@@ -35,14 +35,12 @@ public class snail extends javax.swing.JFrame {
     List<String> idenFloat = new ArrayList<String>();
     functionss fun = new functionss();
     public snail() {
-        initComponents();
-        setResizable(false);
-        setLocation(250, 100);
+        loadUI();
     }
 
     String chemin;
 
-    private void initComponents() {
+    private void loadUI() {
 
         JLabel jLabel3 = new JLabel();
         JPanel jPanel1 = new JPanel();
@@ -67,7 +65,7 @@ public class snail extends javax.swing.JFrame {
 
         charger_un_fichier.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 10)); // NOI18N
         charger_un_fichier.setText("TELECHARGER LE FICHIER");
-        charger_un_fichier.addActionListener(this::Charger_un_fichierActionPerformed);
+        charger_un_fichier.addActionListener(this::laodFichier);
         jPanel1.add(charger_un_fichier);
         charger_un_fichier.setBounds(10, 20, 150, 40);
 
@@ -94,11 +92,6 @@ public class snail extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(10, 130, 775, 330);
 
-
-        //  jLabel1.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/miniprojet/snail_pictures.jpg")))); // NOI18N
-        //  jPanel1.add(jLabel1);
-        //  jLabel1.setBounds(-6, -6, 830, 510);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,9 +102,11 @@ public class snail extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE));
 
         pack();
+        setResizable(false);
+        setLocation(250, 100);
     }
 
-    private void Charger_un_fichierActionPerformed(java.awt.event.ActionEvent evt) {
+    private void laodFichier(java.awt.event.ActionEvent evt) {
         checkSnlStart = false;
         checkSnlClose = false;
         checkStart = false;
@@ -532,19 +527,6 @@ public class snail extends javax.swing.JFrame {
         try {
             if (syntaxique && lexical) {
                 semantique = true;
-                // int h = 0;
-                //    while (h < idenInt.size()) {
-                //     if (idenFloat.contains(idenInt.get(h))) {
-                //   Result.append(idenInt.get(h) + "    :rahi deja declare f real\n\n");
-                //  }
-                // }
-
-                //  int hh = 0;
-                //  while (hh < idenFloat.size()) {
-                // if (idenInt.contains(idenFloat.get(hh))) {
-                //Result.append(idenFloat.get(hh) + "    :rahi deja declare f int\n\n");
-                //    }
-                //}
                 List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
                 for (int j = 0; j < lignes.size(); j++) {
                     lignes.set(j, lignes.get(j).replace("<", " < "));
@@ -654,20 +636,6 @@ public class snail extends javax.swing.JFrame {
     }
 
     public static void main(String[] args) {
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(snail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
         java.awt.EventQueue.invokeLater(() -> new snail().setVisible(true));
     }
-
-
 }

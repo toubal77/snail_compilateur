@@ -1,8 +1,11 @@
 package miniProjet;
 
+import javax.swing.*;
+import java.io.File;
 import java.util.regex.Pattern;
 
 public class functionss {
+
     public boolean isIdent(String str) {
         String regex = "^[a-z][_a-zA-Z_0-9]*$";
         return Pattern.matches(regex, str);
@@ -55,5 +58,4 @@ public class functionss {
         bool = "<".equals(str) || ">".equals(str) || "<=".equals(str) || ">=".equals(str) || "==".equals(str);
         return bool;
     }
-
 }
