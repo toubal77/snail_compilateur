@@ -76,7 +76,7 @@ public class snail extends javax.swing.JFrame {
         jPanel1.add(syntaxe);
         syntaxe.setBounds(310, 70 , 150, 40);
 
-       semantique.setText("Semantique");
+        semantique.setText("Semantique");
         semantique.addActionListener(this::SemantiqueActionPerformed);
         jPanel1.add(semantique);
         semantique.setBounds(610, 70, 150, 40);
@@ -95,9 +95,9 @@ public class snail extends javax.swing.JFrame {
         jScrollPane1.setBounds(10, 130, 775, 330);
 
 
-      //  jLabel1.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/miniprojet/snail_pictures.jpg")))); // NOI18N
-      //  jPanel1.add(jLabel1);
-      //  jLabel1.setBounds(-6, -6, 830, 510);
+        //  jLabel1.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/miniprojet/snail_pictures.jpg")))); // NOI18N
+        //  jPanel1.add(jLabel1);
+        //  jLabel1.setBounds(-6, -6, 830, 510);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,7 +140,7 @@ public class snail extends javax.swing.JFrame {
 
             for (String ligne : lignes) {
 
-                 ligne = ligne.replace(" , ", ",");
+                ligne = ligne.replace(" , ", ",");
                 ligne = ligne.replace(", ", ",");
                 ligne = ligne.replace(" ,", ",");
 
@@ -360,9 +360,9 @@ public class snail extends javax.swing.JFrame {
                                             real.add(mot[i]);
                                             allIden.add(mot[i]);
                                         } else {
-                                        if (!"%".equals(mot[i]) && !"%.".equals(mot[i]))
-                                            Result.append(mot[i] + " : ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
-                                    }
+                                            if (!"%".equals(mot[i]) && !"%.".equals(mot[i]))
+                                                Result.append(mot[i] + " : ne respecte pas la syntaxe d'un identificateur erreur dans la ligne "  + (j+1) + "\n\n");
+                                        }
                                         i++;
                                     }
                                     idenFloat = real;
@@ -434,10 +434,10 @@ public class snail extends javax.swing.JFrame {
                                             Result.append(mot[i] + " n'ai pas declare f la ligne "  + (j+1) + "\n\n");
                                         }
                                         if (idenFloat.contains(mot[i]) && idenInt.contains(mot[i + 2])) {
-                                       //     Result.append(mot[i] + " raha real matnajamch tadi int f la ligne"  + (j+1) + "\n\n");
+                                            //     Result.append(mot[i] + " raha real matnajamch tadi int f la ligne"  + (j+1) + "\n\n");
                                         }
                                         if (idenInt.contains(mot[i]) && idenFloat.contains(mot[i + 2])) {
-                                      //      Result.append(mot[i] + " raha int matnajamch tadi real f la ligne"  + (j+1) + "\n\n");
+                                            //      Result.append(mot[i] + " raha int matnajamch tadi real f la ligne"  + (j+1) + "\n\n");
                                         }
                                     } else {
                                         if (!"from".equals(mot[i + 1])) {
@@ -475,7 +475,7 @@ public class snail extends javax.swing.JFrame {
                                             while (i < mot.length) {
                                                 i++;
                                             }
-                                          if (!"%.".equals(mot[i - 1])) {
+                                            if (!"%.".equals(mot[i - 1])) {
                                                 Result.append("Fin de ligne non declare dans la ligne "  + (j+1) + "\n\n");
                                             }
                                             if (!"%.".equals(mot[i - 1]) && !"\"".equals(mot[i - 2])) {
@@ -534,16 +534,16 @@ public class snail extends javax.swing.JFrame {
                 semantique = true;
                 // int h = 0;
                 //    while (h < idenInt.size()) {
-                    //     if (idenFloat.contains(idenInt.get(h))) {
-                        //   Result.append(idenInt.get(h) + "    :rahi deja declare f real\n\n");
-                        //  }
-                    // }
+                //     if (idenFloat.contains(idenInt.get(h))) {
+                //   Result.append(idenInt.get(h) + "    :rahi deja declare f real\n\n");
+                //  }
+                // }
 
                 //  int hh = 0;
                 //  while (hh < idenFloat.size()) {
-                    // if (idenInt.contains(idenFloat.get(hh))) {
-                        //Result.append(idenFloat.get(hh) + "    :rahi deja declare f int\n\n");
-                        //    }
+                // if (idenInt.contains(idenFloat.get(hh))) {
+                //Result.append(idenFloat.get(hh) + "    :rahi deja declare f int\n\n");
+                //    }
                 //}
                 List<String> lignes = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
                 for (int j = 0; j < lignes.size(); j++) {
@@ -580,7 +580,7 @@ public class snail extends javax.swing.JFrame {
                                             Result.append("Variable int ne peut pas prendre une valeur real dans la ligne " + (j + 1) + "\n\n");
                                         }
                                     }
-                                    }
+                                }
                                 continue;
                             case "Snl_Real":
 
@@ -608,7 +608,7 @@ public class snail extends javax.swing.JFrame {
                                     if (fun.isIdent(mot[i])) {
 
                                         if (!allIden.contains(mot[i])) {
-                                                Result.append(mot[i] + " n'ai pas declare dans la ligne "  + (j+1) + "\n\n");
+                                            Result.append(mot[i] + " n'ai pas declare dans la ligne "  + (j+1) + "\n\n");
 
                                         }
                                     }
